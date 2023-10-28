@@ -1,0 +1,37 @@
+= THWS - CookMate
+Anforderungsspezifikation
+Timo Sauter - Pascal Sauerstein - Marcel Wernisch | v1.0.1 | 10.06.2023
+:doctype: book
+:toc:
+:toc-title: Inhaltsverzeichnis
+:tabsize: 4
+
+[abstract]
+include::chapters/chapter01.adoc[leveloffset=0]
+
+[abstract]
+include::chapters/chapter02.adoc[leveloffset=0]
+
+[abstract]
+include::chapters/chapter03.adoc[leveloffset=0]
+
+[abstract]
+include::chapters/chapter04.adoc[leveloffset=0]
+
+[abstract]
+include::chapters/chapter05.adoc[leveloffset=0]
+
+[abstract]
+include::chapters/chapter06.adoc[leveloffset=0]
+
+[abstract]
+== 7. Prozess- und Anwendungserklärung
+
+=== 7.1 Use-Case Diagramm
+
+[plantuml,useCaseDiagram,svg,role=component]
+.Use-Case Diagramm "THWS Prog3"
+[.text-center]
+....
+include::./diagrams/useCaseDiagram.puml[]
+....

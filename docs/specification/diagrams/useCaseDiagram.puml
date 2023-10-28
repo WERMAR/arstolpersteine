@@ -1,0 +1,10 @@
+@startuml
+!theme cerulean
+
+
+left to right direction
+actor "Nutzer" as user
+rectangle "THWS - Prog3" {
+
+}
+@enduml
