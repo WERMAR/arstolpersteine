@@ -1,11 +1,13 @@
 == 1 Introduction	
-1.1 Purpose
+
+=== 1.1 Purpose
 
 This document provides the basis for the development of the "GPS-based Stumbling Block AR Information Display" app. Any other documents (system design, test plan, implementation and user manual) shall be based on this document.
 
 The document shall be continuously kept in sync with all other related documents.
 
-1.2 Readership
+=== 1.2 Readership
+
 The readership of this document is intended for the following groups:
 
 •	The entire project team
@@ -13,7 +15,8 @@ The readership of this document is intended for the following groups:
 •	Pilot customer
 •	Subsequent maintenance
 
-1.3 Scope of the document
+=== 1.3 Scope of the document
+
 The document initially includes a rough technical description of the project. This then expands on the one hand into...
 
 
@@ -24,28 +27,35 @@ The document initially includes a rough technical description of the project. Th
 
 Additionally, functional diagrams (7.Process and Application Explanation) in the form of UML and a UI design proposal (8.1 Mockup) are included in this document.
 
-1.4 Objective
+=== 1.4 Objective
 
 The objective is to implement a system that shows stumbling blocks on the display. The main functions are:
 •	Using AR to find the stumbling block information
 •	Retrieving navigation routes for the stumbling blocks
 •	Management of the stumbling stone information by the families
 
-1.4.1 Target Group
+==== 1.4.1 Target Group
+
 The target group is aimed at all people who want to learn more about the history of the region and the people who are honored by the Stolpersteine. In addition, the target audience also includes relatives of victims to possibly learn more about their family members or ancestors.
 
-1.5 User Characteristics
+=== 1.5 User Characteristics
+
 The User Characteristics describe the characteristics of the target group users based on the following items:
 
-1.5.1 User Group
+==== 1.5.1 User Group
+
 The main target group of our app can be people of any age who have an interest in the history of the Holocaust, Nazism, and remembering the victims of that terrible time, and we have the families of victims as a user group.
 
-1.5.2 Skills and experience
+==== 1.5.2 Skills and experience
+
 A general understanding of how to use a smartphone/PC is needed to use this application (to upload information), as well as how to use the latest features, such as AR. The "AR App" is intended to display each stumbling block on the mobile device and serve as a helpful source of information for anyone interested in learning about the history of the people honored by the stumbling blocks.
-1.5.3 Restrictions
+
+==== 1.5.3 Restrictions
+
 There are a few limitations to using the application. The most important is to have a smartphone that can use the AR function. Ordnance services must be turned on in order to use GPS functions. Also, an active internet connection is needed to load location data and additional data.
 
-1.5.4 Preferences
+==== 1.5.4 Preferences
+
 Initially, there are no specific preferences. The main language of the application is German. The app is designed with an easy-to-use and intuitive user interface to facilitate navigation and access to information.
 
 
