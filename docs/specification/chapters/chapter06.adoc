@@ -1,22 +1,22 @@
 == 6. Non-functional requirements
 
-6.1 Usability
+=== 6.1 Usability
 
 Only the functionality that the user needs to carry out his or her tasks is included - this improves the user experience. The Identity verification procedures should be straightforward and easy to use in order to enable users to register and verify their details seamlessly. The application ought to provide clear and easy-to-follow instructions and tutorials to assist family members in compiling and submitting relevant information.
 
-6.2 Reliability
+=== 6.2 Reliability
 
 Identification of the subsystems on which the reliability of the system depends significantly. Define additional quality and test measures to ensure the required reliability. Verify the accuracy of all user input and information provided by other systems.
 
-6.3 Security
+=== 6.3 Security
 
 The application must comply with rigorous privacy regulations and safeguard securely uploaded identity proofs and stored information with confidentiality. The introduction of measures to detect and deter identity fraud and fake identities is necessary. There must be strict access controls to ensure that only authorized family members can access the deceased's information. In case of loss of account access by family members, a mechanism for emergency access and data recovery should exist.
 
-6.4 Performance
+=== 6.4 Performance
 
 The application should readily respond to requests and enable swift deposit and updating of information to guarantee user satisfaction. It ought to accommodate a growing number of users whilst maintaining performance.
 
-6.5 Compliance
+=== 6.5 Compliance
 
 The application must adhere to relevant data protection laws and regulations, specifically concerning the storage and processing of personal data. It is imperative to perform regular backups of data in order to preserve the integrity of the information and comply with legal requirements.
 

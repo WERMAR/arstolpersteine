@@ -1,34 +1,34 @@
 == 2. General description
 
-2.1 Basic functions
+=== 2.1 Basic functions
 
 The application will be implemented as a standalone application and will focus on the detection of stumbling blocks in the city of Hassfurt using GPS. The main functionalities of the application are structured as follows:
 
-2.1.1 GPS detection and AR information.
+==== 2.1.1 GPS detection and AR information.
 
 The application must be able to use GPS to detect the position of stumbling blocks in the user's environment (three metres). Using the augmented reality (AR) feature, relevant information about each obstacle should be displayed to the user via the mobile phone camera. This information could include historical background, images or text about the people represented by the stumbling blocks.
 
-2.1.2 Navigation and filtering.
+==== 2.1.2 Navigation and filtering.
 
 Our application should provide the user with the ability to navigate and filter stumbling blocks in the environment. This includes implementing navigation features that allow the user to find the nearest stumbling block based on their current location. In addition, the app should provide filtering options that allow the user to filter obstacles based on criteria such as date, type of historical events, or other parameters.
 
-2.1.3 Database management and updates
+==== 2.1.3 Database management and updates
 
 To ensure smooth operation, the application should have a database that stores relevant information about the obstacles and their locations. This database should be able to be updated regularly to include new obstacles or updated information. Updating the database should only be possible by the development team to ensure the integrity and quality of the information provided.
 
-2.2 Limitations
+=== 2.2 Limitations
 
 There are some limitations that need to be considered when developing our application. These limitations include.
 
-2.2.1 GPS accuracy and performance
+==== 2.2.1 GPS accuracy and performance
 
 The application relies on the accuracy and performance of the GPS signal, which means that there may be limitations in the accuracy of the location of obstacles. This limitation may be particularly noticeable in areas with limited or weak GPS signal.
 
-2.2.2 AR compatibility and device requirements.
+==== 2.2.2 AR compatibility and device requirements.
 
 The AR functionality of the application may depend on the technical specifications and compatibility of the end devices used. It is important to note that not all devices may be able to fully support the AR functionality of the Application.
 
-2.2.3 Privacy and Information Security
+==== 2.2.3 Privacy and Information Security
 
 As the application may work with location data and other personal information, it is critical to adhere to strict privacy policies and regulations. The application must ensure that all data collected is secure.
 
