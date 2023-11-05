@@ -42,5 +42,5 @@ include::./diagrams/useCaseDiagram.puml[]
 .Use-Case Diagramm "AR-Project: Stolpersteine"
 [.text-center]
 ....
-include::./diagrams/arproject.puml[]
+include::./diagrams/ermdiagram.puml[]
 ....
