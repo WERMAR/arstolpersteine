@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: development
+    group:
+      development:
+        - database
+
+  # Liquibase Configuration
+  liquibase:
+    drop-first: false
+    enabled: true
+    contexts: development
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
