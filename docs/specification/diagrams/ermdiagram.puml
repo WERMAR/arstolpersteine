@@ -1,0 +1,67 @@
+@startuml
+
+!define Table(name,desc) class name as "desc" << (T,orchid) >>
+!define primary_key(x) <u>x</u>
+!define foreign_key(x) x ..>
+
+Table(Victim, "Victim") {
+    primary_key(victim_id) : int
+    name : varchar(30)
+    last_name : varchar(30)
+    date_of_birth : date
+    date_of_death : date
+}
+
+Table(Role, "Role") {
+    primary_key(role_id) : int
+    role_name : varchar(15)
+}
+
+Table(User, "User") {
+    primary_key(user_id) : int
+    password : varchar(255)
+    login_email : varchar(50)
+    name : varchar(30)
+    last_name : varchar(30)
+    foreign_key(role_id) : int
+}
+
+Table(Stolperstein, "Stolperstein") {
+    primary_key(stolperstein_id) : int
+    description : varchar(255)
+    approved : boolean
+    foreign_key(user_id) : int
+    foreign_key(victim_id) : int
+}
+
+Table(Address, "Address") {
+    primary_key(address_id) : int
+    street_name : varchar(50)
+    house_number : int
+    post_code : int
+    suburb : varchar(50)
+    long : float
+    lat : float
+    foreign_key(stolperstein_id) : int
+}
+
+Table(Photo, "Photo") {
+    primary_key(photo_id) : int
+    lat : float
+    heading : varchar(10)
+    long : float
+    approved : boolean
+    foreign_key(user_id) : int
+    foreign_key(stolperstein_id) : int
+    foreign_key(approve_user_id) : int
+}
+
+User --|> Role : fk_user_role
+Stolperstein --|> User : fk_stolpersteine_user
+Stolperstein --|> Victim : fk_stolpersteine_victim
+Address --|> Stolperstein : fk_address_stolperstein
+Photo --|> User : fk_photo_user
+Photo --|> Stolperstein : fk_photo_stolperstein
+Photo --|> User : fk_photo_approved_user
+
+@enduml
