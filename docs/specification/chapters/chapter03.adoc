@@ -1,1 +1,26 @@
-== 3. Fachliche Anforderungen
+== 3. Technical requirements
+The technical requirements are now listed below
+
+=== 3.1 Stumbling block navigation
+
+[cols="1,2,6,1"]
+|===
+|No. | Component | Description | Priority
+
+
+|1 | Navigation | The user should see all the stumbling blocks when they open the app.| high
+|1.1 | Navigation | The user should be able to see the path to the nearest stumbling block after reaching the first one. | high
+|1.2 | Navigation | The user should be able to select a stumbling block and thus receive a route description. | high
+|===
+
+
+=== 3.2 Information upload
+
+[cols="1,2,6,1"]
+|===
+|No. | Component | Description | Priority
+
+|1| Verification| The user needs an upload function to identify themselves as a family member. | high
+|2 | Adding information| Once verified, the user must be able to add additional information to the stumbling block.| high
+
+|===
