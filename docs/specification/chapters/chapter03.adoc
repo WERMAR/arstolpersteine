@@ -24,3 +24,14 @@ The technical requirements are now listed below
 |2 | Adding information| Once verified, the user must be able to add additional information to the stumbling block.| high
 
 |===
+
+=== 3.3 Visualisation
+
+[cols="1,2,6,1"]
+|===
+|No. | Component | Description | Priority
+
+|1 | Pop up| When a user of the app is within 3 metres of an stumbling block, information about that stumbling block should appear. | high
+|1.1 | AR Pop up| When a user points their phone or tablet camera in the direction of the stumbling block, an AR pop-up should open with relevant information.  | low
+|2| Old view | f possible, the user should be able to see pictures of the place from around 1938 near the Stumbling Stone in order to compare it with today. | low
+|===
