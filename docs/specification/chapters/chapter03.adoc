@@ -11,6 +11,7 @@ The technical requirements are now listed below
 |1 | Navigation | The user should see all the stumbling blocks when they open the app.| high
 |1.1 | Navigation | The user should be able to see the path to the nearest stumbling block after reaching the first one. | high
 |1.2 | Navigation | The user should be able to select a stumbling block and thus receive a route description. | high
+|2 | Filter| The application should provide filtering options that allow the user to filter the stumbling blocks according to criteria such as a date, a historical event, or any other parameter.| high
 |===
 
 
