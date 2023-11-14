@@ -35,3 +35,36 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+
+app/android/app/.gradle
+app/android/app//build/
+app/android/app/*.iml
+app/android/app/local.properties
+app/android/app/.idea/caches
+app/android/app/.idea/libraries
+app/android/app/.idea/modules.xml
+app/android/app/.idea/workspace.xml
+app/android/app/.idea/navEditor.xml
+app/android/app/.idea/assetWizardSettings.xml
+app/android/app/.DS_Store
+app/android/app/build
+app/android/app/captures
+app/android/app/.externalNativeBuild
+app/android/app/.cxx
+
+app/android/app/app/proguard-rules.pro
+
+app/android/app/gradlew
+
+app/android/app/gradlew.bat
+
+# Ignore Gradle GUI config
+app/android/app/gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+app/android/app/!gradle-wrapper.jar
+
+# Cache of project
+app/android/app/.gradletasknamecache
