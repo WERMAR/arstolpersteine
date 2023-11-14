@@ -1,1 +1,22 @@
-==  5. Technische Anforderungen
+== 5 Technical requirements
+
+=== 5.1 Minimum requirements
+
+The minimum technical requirements form the basis of the application. If they are not met, the smooth operation of the application on the target system cannot be guaranteed.
+
+==== 5.1.1 Graphical requirements
+
+The application should not use overly complex graphical content. Care should be taken to ensure that even smaller smartphones can display all content clearly.
+
+==== 5.1.2 Maximum processing power
+
+Computing power varies from device to device. Due to the wide range of smartphones and tablets, care should be taken to ensure that older models can also run the application. Due to this limitation, attention must be paid to the effective use of resources during development.
+
+==== 5.1.3 Operating Systems
+
+The target systems are Windows and Android, as this is a tablet or smartphone application.
+
+==== 5.1.4 Memory consumption
+
+The application should not consume too much memory as it is unlikely to be used frequently. It is assumed that the main users will be travellers or family members.
+
