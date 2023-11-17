@@ -70,9 +70,9 @@ app/android/app/!gradle-wrapper.jar
 app/android/app/.gradletasknamecache
 
 app/ios/ARStolpersteine/*.xcuserstate
-*.xccheckout
-*.xcworkspace
-xcuserdata/
+app/ios/ARStolpersteine/*.xccheckout
+app/ios/ARStolpersteine/*.xcworkspace
+app/ios/ARStolpersteine/xcuserdata/
 
 # Build products
 build/
