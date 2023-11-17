@@ -44,6 +44,7 @@
 		F6474EB72B07688E00890712 /* ARStolpersteineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARStolpersteineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6474EBB2B07688E00890712 /* ARStolpersteineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARStolpersteineUITests.swift; sourceTree = "<group>"; };
 		F6474EBD2B07688E00890712 /* ARStolpersteineUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARStolpersteineUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F6E195612B0777C00034A233 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +95,8 @@
 		F6474E9F2B07688C00890712 /* ARStolpersteine */ = {
 			isa = PBXGroup;
 			children = (
+				F6E195612B0777C00034A233 /* Info.plist */,
+				F6E1955E2B0772FD0034A233 /* views */,
 				F6474EA02B07688C00890712 /* AppDelegate.swift */,
 				F6474EA22B07688C00890712 /* ContentView.swift */,
 				F6474EA42B07688E00890712 /* Assets.xcassets */,
@@ -125,6 +128,13 @@
 				F6474EBD2B07688E00890712 /* ARStolpersteineUITestsLaunchTests.swift */,
 			);
 			path = ARStolpersteineUITests;
+			sourceTree = "<group>";
+		};
+		F6E1955E2B0772FD0034A233 /* views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -425,9 +435,9 @@
 				DEVELOPMENT_TEAM = 9K8U9LWJZJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ARStolpersteine/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -456,9 +466,9 @@
 				DEVELOPMENT_TEAM = 9K8U9LWJZJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ARStolpersteine/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
