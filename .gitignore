@@ -69,7 +69,7 @@ app/android/app/!gradle-wrapper.jar
 # Cache of project
 app/android/app/.gradletasknamecache
 
-*.xcuserstate
+app/ios/ARStolpersteine/*.xcuserstate
 *.xccheckout
 *.xcworkspace
 xcuserdata/
