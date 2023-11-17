@@ -68,3 +68,27 @@ app/android/app/!gradle-wrapper.jar
 
 # Cache of project
 app/android/app/.gradletasknamecache
+
+*.xcuserstate
+*.xccheckout
+*.xcworkspace
+xcuserdata/
+
+# Build products
+build/
+DerivedData/
+
+# Dependencies (CocoaPods, Carthage, etc.)
+Pods/
+Carthage/
+
+# Private data (keys, credentials)
+*.xcconfig
+*.plist
+
+# Miscellaneous
+*.log
+*.swp
+*.lock
+*.xcuserdatad/
+*.idea/
