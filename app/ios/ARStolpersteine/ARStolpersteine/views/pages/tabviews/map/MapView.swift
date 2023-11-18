@@ -9,26 +9,18 @@ import SwiftUI
 import MapKit
 
 
-struct MapView: View, MapDelegate {
-    @StateObject private var viewModel = MapViewModel()
+struct MapView: View {
+    
+    @StateObject var manager = LocationManager()
     @State private var updatedRegion: MKCoordinateRegion? = nil
     
     
     var body: some View {
         ZStack{
-            Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
-                .edgesIgnoringSafeArea(.top)
-        }.onAppear {
-            viewModel.checkIfLocationServicesIsEnabled()
-            viewModel.startUpdatingPosition(self)
+            Map(coordinateRegion: $manager.region, 
+                showsUserLocation: true)
+            .edgesIgnoringSafeArea(.top)
         }
-        .onDisappear {
-            self.viewModel.stopUpdatingPosition()
-        }
-    }
-    
-    func regionDidChanged(_ region: MKCoordinateRegion) {
-        self.updatedRegion = region
     }
 }
 

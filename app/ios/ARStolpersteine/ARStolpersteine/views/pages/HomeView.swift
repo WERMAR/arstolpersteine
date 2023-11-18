@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var selection = 1
+    @State private var selection = 2
     
     var body: some View {
         VStack {
@@ -25,8 +25,8 @@ struct HomeView: View {
                     }.tag(2)
                 CameraARView()
                     .tabItem {
-                        Image(systemName: "arrow.triangle.branch")
-                        Text("Routen")
+                        Image(systemName: "arkit")
+                        Text("AR-Stolpersteine")
                     }.tag(3)
             }
         }

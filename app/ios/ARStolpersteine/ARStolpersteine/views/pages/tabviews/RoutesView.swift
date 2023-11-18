@@ -9,7 +9,10 @@ import SwiftUI
 
 struct RoutesView: View {
     var body: some View {
-        Text("This were Routes")
+        ZStack {
+            Color.backgroundColor.ignoresSafeArea()
+            Text("This were Routes")
+        }
     }
 }
 
