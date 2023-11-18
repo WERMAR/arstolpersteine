@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  CameraARView.swift
 //  ARStolpersteine
 //
 //  Created by Marcel Wernisch on 17.11.23.
@@ -8,9 +8,9 @@
 import SwiftUI
 import RealityKit
 
-struct ContentView : View {
+struct CameraARView: View {
     var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all)
+        ARViewContainer().edgesIgnoringSafeArea(.top)
     }
 }
 
@@ -40,6 +40,7 @@ struct ARViewContainer: UIViewRepresentable {
     
 }
 
+
 #Preview {
-    ContentView()
+    CameraARView()
 }

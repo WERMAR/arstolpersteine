@@ -8,12 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		F6474EA12B07688C00890712 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6474EA02B07688C00890712 /* AppDelegate.swift */; };
-		F6474EA32B07688C00890712 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6474EA22B07688C00890712 /* ContentView.swift */; };
 		F6474EA52B07688E00890712 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6474EA42B07688E00890712 /* Assets.xcassets */; };
 		F6474EA82B07688E00890712 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6474EA72B07688E00890712 /* Preview Assets.xcassets */; };
 		F6474EB22B07688E00890712 /* ARStolpersteineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6474EB12B07688E00890712 /* ARStolpersteineTests.swift */; };
 		F6474EBC2B07688E00890712 /* ARStolpersteineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6474EBB2B07688E00890712 /* ARStolpersteineUITests.swift */; };
 		F6474EBE2B07688E00890712 /* ARStolpersteineUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6474EBD2B07688E00890712 /* ARStolpersteineUITestsLaunchTests.swift */; };
+		F6E195882B07A64F0034A233 /* MapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E195862B07A64E0034A233 /* MapDelegate.swift */; };
+		F6E195892B07A64F0034A233 /* PageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E195872B07A64F0034A233 /* PageEnum.swift */; };
+		F6E195912B07A6620034A233 /* CameraARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E1958A2B07A6620034A233 /* CameraARView.swift */; };
+		F6E195942B07A6620034A233 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E1958D2B07A6620034A233 /* MapView.swift */; };
+		F6E195962B07A6620034A233 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E1958F2B07A6620034A233 /* HomeView.swift */; };
+		F6E195992B07A7520034A233 /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E195982B07A7520034A233 /* RoutesView.swift */; };
+		F6E1959E2B083E260034A233 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E1959D2B083E260034A233 /* LocationManager.swift */; };
+		F6E195A02B0846FA0034A233 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E1959F2B0846FA0034A233 /* ColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +43,6 @@
 /* Begin PBXFileReference section */
 		F6474E9D2B07688C00890712 /* ARStolpersteine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARStolpersteine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6474EA02B07688C00890712 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F6474EA22B07688C00890712 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F6474EA42B07688E00890712 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F6474EA72B07688E00890712 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F6474EAD2B07688E00890712 /* ARStolpersteineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARStolpersteineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +51,14 @@
 		F6474EBB2B07688E00890712 /* ARStolpersteineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARStolpersteineUITests.swift; sourceTree = "<group>"; };
 		F6474EBD2B07688E00890712 /* ARStolpersteineUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARStolpersteineUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F6E195612B0777C00034A233 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F6E195862B07A64E0034A233 /* MapDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDelegate.swift; sourceTree = "<group>"; };
+		F6E195872B07A64F0034A233 /* PageEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageEnum.swift; sourceTree = "<group>"; };
+		F6E1958A2B07A6620034A233 /* CameraARView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraARView.swift; sourceTree = "<group>"; };
+		F6E1958D2B07A6620034A233 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		F6E1958F2B07A6620034A233 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F6E195982B07A7520034A233 /* RoutesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
+		F6E1959D2B083E260034A233 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		F6E1959F2B0846FA0034A233 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +111,8 @@
 			children = (
 				F6E195612B0777C00034A233 /* Info.plist */,
 				F6E1955E2B0772FD0034A233 /* views */,
+				F6E195852B07A62D0034A233 /* Helper */,
 				F6474EA02B07688C00890712 /* AppDelegate.swift */,
-				F6474EA22B07688C00890712 /* ContentView.swift */,
 				F6474EA42B07688E00890712 /* Assets.xcassets */,
 				F6474EA62B07688E00890712 /* Preview Content */,
 			);
@@ -133,8 +147,47 @@
 		F6E1955E2B0772FD0034A233 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				F6E1959A2B07A8100034A233 /* pages */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		F6E195852B07A62D0034A233 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				F6E195862B07A64E0034A233 /* MapDelegate.swift */,
+				F6E195872B07A64F0034A233 /* PageEnum.swift */,
+				F6E1959F2B0846FA0034A233 /* ColorExtension.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		F6E1959A2B07A8100034A233 /* pages */ = {
+			isa = PBXGroup;
+			children = (
+				F6E1959C2B07A82F0034A233 /* tabviews */,
+				F6E1958F2B07A6620034A233 /* HomeView.swift */,
+			);
+			path = pages;
+			sourceTree = "<group>";
+		};
+		F6E1959B2B07A8180034A233 /* map */ = {
+			isa = PBXGroup;
+			children = (
+				F6E1958D2B07A6620034A233 /* MapView.swift */,
+				F6E1959D2B083E260034A233 /* LocationManager.swift */,
+			);
+			path = map;
+			sourceTree = "<group>";
+		};
+		F6E1959C2B07A82F0034A233 /* tabviews */ = {
+			isa = PBXGroup;
+			children = (
+				F6E195982B07A7520034A233 /* RoutesView.swift */,
+				F6E1958A2B07A6620034A233 /* CameraARView.swift */,
+				F6E1959B2B07A8180034A233 /* map */,
+			);
+			path = tabviews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,8 +320,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6474EA32B07688C00890712 /* ContentView.swift in Sources */,
+				F6E195992B07A7520034A233 /* RoutesView.swift in Sources */,
+				F6E195882B07A64F0034A233 /* MapDelegate.swift in Sources */,
+				F6E195942B07A6620034A233 /* MapView.swift in Sources */,
+				F6E195A02B0846FA0034A233 /* ColorExtension.swift in Sources */,
+				F6E195962B07A6620034A233 /* HomeView.swift in Sources */,
 				F6474EA12B07688C00890712 /* AppDelegate.swift in Sources */,
+				F6E195912B07A6620034A233 /* CameraARView.swift in Sources */,
+				F6E195892B07A64F0034A233 /* PageEnum.swift in Sources */,
+				F6E1959E2B083E260034A233 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,8 +497,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ARStolpersteine/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need the Location to display Stumbling Blocks in the your area";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "arkit gps location-services";
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -468,8 +529,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ARStolpersteine/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need the Location to display Stumbling Blocks in the your area";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "arkit gps location-services";
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

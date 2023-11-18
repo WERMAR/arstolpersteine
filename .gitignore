@@ -69,13 +69,13 @@ app/android/app/!gradle-wrapper.jar
 # Cache of project
 app/android/app/.gradletasknamecache
 
-app/ios/ARStolpersteine/*.xcuserstate
-app/ios/ARStolpersteine/*.xccheckout
-app/ios/ARStolpersteine/*.xcworkspace
-app/ios/ARStolpersteine/xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.xcworkspace
+xcuserdata/
+*.xcscheme
 
 # Build products
-build/
 DerivedData/
 
 # Dependencies (CocoaPods, Carthage, etc.)
