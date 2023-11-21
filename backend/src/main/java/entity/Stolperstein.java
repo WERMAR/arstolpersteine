@@ -18,11 +18,11 @@ public class Stolperstein {
     private String description;
 
     @Column(name = "approved")
-    private short approved;
+    private boolean approved;
 
     @OneToMany(mappedBy = "Stolperstein")
-    List<User> userList;
+    private List<User> userList;
 
     @OneToMany(mappedBy = "Stolperstein")
-    List<Victim> victimList;
+    private List<Victim> victimList;
 }

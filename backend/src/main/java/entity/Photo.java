@@ -26,10 +26,11 @@ public class Photo {
     @Column(name = "approved")
     private short approved;
 
-    @OneToMany(mappedBy = "Photo")
-    List<User> userList;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "User")
+    private User uploader;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "Stolperstein")
     private Stolperstein stolperstein;
 
