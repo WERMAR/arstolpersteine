@@ -1,8 +1,9 @@
-package entity;
+package com.thws.ar.stolpersteine.backend.db.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 
 
 @Data
@@ -11,12 +12,12 @@ import lombok.Data;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "login_email")
+    @Column(name = "email")
     private String email;
 
     @Column(name = "name")
@@ -29,5 +30,9 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role roleId;
 
+    @OneToMany(mappedBy = "createdUser")
+    private List<Stolperstein> ownedStolpersteine;
 
+    @OneToMany(mappedBy = "approvedUser")
+    private List<Stolperstein> approvedStolpersteine;
 }

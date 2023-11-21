@@ -1,14 +1,14 @@
 databaseChangeLog:
   - changeSet:
       id: 0211232320-initialScript-create_victim
-      author: yulia fotieva
+      author: Yulia Fotieva
       changes:
         - createTable:
             tableName: Victim
             columns:
               - column:
                   name: victim_id
-                  type: int(64)
+                  type: int
                   constraints:
                     nullable: false
                     primaryKey: true
@@ -35,14 +35,14 @@ databaseChangeLog:
 
   - changeSet:
       id: 0211232320-initialScript-create_role
-      author: yulia fotieva
+      author: Yulia Fotieva
       changes:
         - createTable:
             tableName: Role
             columns:
               - column:
                   name: role_id
-                  type: int(64)
+                  type: int
                   constraints:
                     nullable: false
                     primaryKey: true
@@ -54,14 +54,14 @@ databaseChangeLog:
 
   - changeSet:
       id: 0211232320-initialScript-create_user
-      author: yulia fotieva
+      author: Yulia Fotieva
       changes:
         - createTable:
             tableName: User
             columns:
               - column:
                   name: user_id
-                  type: int(64)
+                  type: int
                   constraints:
                     nullable: false
                     primaryKey: true
@@ -71,7 +71,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: login_email
+                  name: email
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
@@ -87,49 +87,11 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: role_id
-                  type: int(64)
+                  type: int
                   constraints:
                     nullable: false
                     foreignKeyName: fk_user_role
                     references: role(role_id)
-
-  - changeSet:
-      id: 0211232320-initialScript-create_stolpersteine
-      author: yulia fotieva
-      changes:
-        - createTable:
-            tableName: Stolperstein
-            columns:
-              - column:
-                  name: stolperstein_id
-                  type: int(64)
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-              - column:
-                  name: description
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: approved
-                  type: BOOLEAN
-                  constraints:
-                    nullable: false
-              - column:
-                  name: user_id
-                  type: int(64)
-                  constraints:
-                    nullable: false
-                    foreignKeyName: fk_stolpersteine_user
-                    references: user(user_id)
-              - column:
-                  name: victim_id
-                  type: int(64)
-                  constraints:
-                    foreignKeyName: fk_stolpersteine_victim
-                    references: victim(victim_id)
-                    nullable: false
 
   - changeSet:
       id: 0211232320-initialScript-create_address
@@ -140,7 +102,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: address_id
-                  type: int(64)
+                  type: int
                   constraints:
                     nullable: false
                     primaryKey: true
@@ -160,9 +122,54 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: suburb
+                  name: city
                   type: VARCHAR(50)
                   constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 0211232320-initialScript-create_stolpersteine
+      author: Yulia Fotieva
+      changes:
+        - createTable:
+            tableName: Stolperstein
+            columns:
+              - column:
+                  name: stolperstein_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: VARCHAR(512)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: active
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_user
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_stolpersteine_user_created
+                    references: user(user_id)
+              - column:
+                  name: approved_user
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_stolpersteine_user_approved
+                    references: user(user_id)
+              - column:
+                  name: victim_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_stolpersteine_victim
+                    references: victim(victim_id)
                     nullable: false
               - column:
                   name: long
@@ -175,39 +182,29 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: stolperstein_id
-                  type: int(64)
+                  name: address_id
+                  type: int
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_address_stolperstein
-                    references: stolperstein(stolperstein_id)
+                    foreignKeyName: fk_stolperstein_address
+                    references: address(address_id)
 
   - changeSet:
       id: 0211232320-initialScript-create_photo
-      author: yulia fotieva
+      author: Yulia Fotieva
       changes:
         - createTable:
             tableName: Photo
             columns:
               - column:
                   name: photo_id
-                  type: int(64)
+                  type: int
                   constraints:
                     nullable: false
                     primaryKey: true
               - column:
-                  name: lat
-                  type: FLOAT
-                  constraints:
-                    nullable: false
-              - column:
                   name: heading
-                  type: VARCHAR(10)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: long
-                  type: FLOAT
+                  type: int
                   constraints:
                     nullable: false
               - column:
@@ -216,23 +213,23 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: user_id
-                  type: int(64)
+                  name: created_user
+                  type: int
                   constraints:
-                    foreignKeyName: fk_photo_user
+                    foreignKeyName: fk_photo_user_created
+                    references: user(user_id)
+                    nullable: false
+              - column:
+                  name: approved_user
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_photo_user_approved_user
                     references: user(user_id)
                     nullable: false
               - column:
                   name: stolperstein_id
-                  type: int(64)
+                  type: int
                   constraints:
                     foreignKeyName: fk_photo_stolperstein
                     references: stolperstein(stolperstein_id)
-                    nullable: false
-              - column:
-                  name: approve_user_id
-                  type: int(64)
-                  constraints:
-                    foreignKeyName: fk_photo_approved_user
-                    references: user(user_id)
                     nullable: false

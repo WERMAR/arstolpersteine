@@ -1,4 +1,4 @@
-package entity;
+package com.thws.ar.stolpersteine.backend.db.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -12,7 +12,7 @@ public class Victim {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int victim_id;
+    private Integer victim_id;
 
     @Column(name = "name")
     private String name;
