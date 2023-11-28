@@ -15,3 +15,18 @@ spring:
     hibernate:
       ddl-auto: none
 
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: backend-client
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost/realms/arStolpersteine
+            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost/realms/arStolpersteine
