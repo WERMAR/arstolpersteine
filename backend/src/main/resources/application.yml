@@ -17,16 +17,34 @@ spring:
 
   security:
     oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${backend.keycloak.base}/certs
       client:
         registration:
           keycloak:
+            authorization-grant-type: client_credentials
             client-id: backend-client
-            authorization-grant-type: authorization_code
-            scope: openid
+            client-secret: tlzRiERgcCepxEQiXyr2iPc5GpwCjoGw
         provider:
           keycloak:
-            issuer-uri: http://localhost/realms/arStolpersteine
-            user-name-attribute: preferred_username
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost/realms/arStolpersteine
+            authorization-uri: : ${backend.keycloak.base}/authorize
+            token-uri: ${backend.keycloak.base}/token
+
+backend:
+  keycloak:
+    serverUrl: "http://:localhost/auth"
+    realm: arStolpersteine
+    base: ${backend.keycloak.serverUrl}/realms/${backend.keycloak.realm}/protocol/openid-connect
+  rest:
+    security:
+      allowList:
+        - /security/**
+        - /error
+        - /swagger-ui/**
+        - /v3/api-docs*/***
+        - /webjars/**
+
+server:
+  port: 8580
+
