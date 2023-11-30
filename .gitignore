@@ -38,21 +38,21 @@ build/
 
 
 
-app/android/app/.gradle
-app/android/app//build/
-app/android/app/*.iml
-app/android/app/local.properties
-app/android/app/.idea/caches
-app/android/app/.idea/libraries
-app/android/app/.idea/modules.xml
-app/android/app/.idea/workspace.xml
-app/android/app/.idea/navEditor.xml
-app/android/app/.idea/assetWizardSettings.xml
-app/android/app/.DS_Store
-app/android/app/build
-app/android/app/captures
-app/android/app/.externalNativeBuild
-app/android/app/.cxx
+app/android/ARStolpersteine/.gradle
+app/android/ARStolpersteine//build/
+app/android/ARStolpersteine/*.iml
+app/android/ARStolpersteine/local.properties
+app/android/ARStolpersteine/.idea/caches
+app/android/ARStolpersteine/.idea/libraries
+app/android/ARStolpersteine/.idea/modules.xml
+app/android/ARStolpersteine/.idea/workspace.xml
+app/android/ARStolpersteine/.idea/navEditor.xml
+app/android/ARStolpersteine/.idea/assetWizardSettings.xml
+app/android/ARStolpersteine/.DS_Store
+app/android/ARStolpersteine/build
+app/android/ARStolpersteine/captures
+app/android/ARStolpersteine/.externalNativeBuild
+app/android/ARStolpersteine/.cxx
 
 app/android/app/app/proguard-rules.pro
 

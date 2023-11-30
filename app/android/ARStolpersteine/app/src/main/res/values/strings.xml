@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ARStolpersteine</string>
+    <string name="title_home">Routen</string>
+    <string name="title_dashboard">Map</string>
+    <string name="title_notifications">AR-Stolpersteine</string>
+    <string name="my_map_api_key">AIzaSyBxHkcvnd6JQA8IM61ogPlFW-yB9UePe44</string>
+</resources>
