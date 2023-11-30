@@ -15,3 +15,41 @@ spring:
     hibernate:
       ddl-auto: none
 
+  cache:
+    type: NONE
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${backend.keycloak.base}/certs
+          issuer-uri: ${backend.keycloak.serverUrl}/realms/${backend.keycloak.realm}
+      client:
+        provider:
+          keycloak:
+            authorization-uri: ${backend.keycloak.base}/authorize
+            token-uri: ${backend.keycloak.base}/token
+        registration:
+          keycloak:
+            authorization-grant-type: client_credentials
+            client-id: backend-client
+            client-secret: tlzRiERgcCepxEQiXyr2iPc5GpwCjoGw
+
+backend:
+  keycloak:
+    serverUrl: "http://localhost"
+    realm: arStolpersteine
+    base: ${backend.keycloak.serverUrl}/realms/${backend.keycloak.realm}/protocol/openid-connect
+  rest:
+    security:
+      allowList:
+        - /security/**
+        - /error
+        - /swagger-ui/**
+        - /v3/api-docs*/***
+        - /webjars/**
+        - /api/public/**
+
+server:
+  port: 8580
+
