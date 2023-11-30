@@ -6,10 +6,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 
-@Getter
+
 @ConfigurationProperties("backend.rest.security")
 public class WebSecurityConfigurationProperties {
 
+    @Getter
     @Setter
-    private List<String> allowlist;
+    private List<String> allowList;
 }
