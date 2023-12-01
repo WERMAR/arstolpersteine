@@ -15,9 +15,6 @@ spring:
     hibernate:
       ddl-auto: none
 
-  cache:
-    type: NONE
-
   security:
     oauth2:
       resourceserver:
@@ -52,4 +49,6 @@ backend:
 
 server:
   port: 8580
+  servlet:
+    context-path: /api
 
