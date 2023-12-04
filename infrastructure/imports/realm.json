@@ -501,6 +501,61 @@
       },
       "notBefore": 0,
       "groups": []
+    },
+    {
+      "id": "4415ecd9-b246-4d5e-aa42-76660bdf5ee3",
+      "createdTimestamp": 1701027805267,
+      "username": "test-user",
+      "firstName": "Test-User",
+      "lastName": "Admin",
+      "credentials": [{
+        "type":"password",
+        "value":"password",
+        "temporary":false}
+      ],
+      "enabled": true,
+      "totp": false,
+      "emailVerified": true,
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-arstolpersteine"
+      ],
+      "clientRoles": {
+        "backend-client": [
+          "ADMIN",
+          "USER"
+        ]
+      },
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "4415ecd9-b246-4d5e-aa42-76efdbdf5ee3",
+      "createdTimestamp": 1701027805267,
+      "username": "test-st-user",
+      "firstName": "Test-User",
+      "lastName": "Standard",
+      "credentials": [{
+        "type":"password",
+        "value":"password",
+        "temporary":false}
+      ],
+      "enabled": true,
+      "totp": false,
+      "emailVerified": true,
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-arstolpersteine"
+      ],
+      "clientRoles": {
+        "backend-client": [
+          "USER"
+        ]
+      },
+      "notBefore": 0,
+      "groups": []
     }
   ],
   "scopeMappings": [
@@ -672,7 +727,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": true,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "tlzRiERgcCepxEQiXyr2iPc5GpwCjoGw",
       "redirectUris": [
         ""
       ],
