@@ -1,0 +1,10 @@
+{
+  "documentationProvider": "springdoc",
+  "interfaceOnly": true,
+  "skipDefaultInterface": true,
+  "openApiNullable": false,
+  "useTags": true,
+  "generatedConstructorWithRequiredArgs": false,
+  "additionalModelTypeAnnotations": "@lombok.NoArgsConstructor;@lombok.AllArgsConstructor;@lombok.Builder",
+  "useSpringBoot3": true
+}

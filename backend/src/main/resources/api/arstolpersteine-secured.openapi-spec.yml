@@ -1,0 +1,594 @@
+openapi: 3.0.0
+info:
+  title: Secured AR-Stolperstein API
+  description: This is the secured OpenAPI Specification for the AR-Stolpersteine Backend
+  version: 1.0.0
+paths:
+  /api/secured/stolpersteine/{userId}:
+    get:
+      tags:
+        - Secured
+      summary: Get Stolpersteine for User
+      description: Get all available Stolpersteine for an User
+      operationId: getStolpersteineForUser
+      parameters:
+        - name: userId
+          in: path
+          description: ID of User
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: return all stolpersteine based on userId
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StolpersteineResponseDto'
+        400:
+          description: Bad Request when no userID was provided
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        404:
+          description: If no Stolpersteine for UserId was found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+    post:
+      tags:
+        - Secured
+      summary: Create a new Stolpersteine for given userId
+      description: Get all available Stolpersteine for an User
+      operationId: addStolpersteinForUser
+      parameters:
+        - name: userId
+          in: path
+          description: ID of User
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StolpersteineReqDto'
+      responses:
+        200:
+          description: return created stolpersteine
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StolpersteineResponseDto'
+        400:
+          description: Bad Request when no valid request was send
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+  /api/secured/stolpersteine/update/{stolpersteinId}:
+    put:
+      tags:
+        - Secured
+      summary: Update a existing Stolpersteine
+      description: Update a existing Stolperstein for given Id
+      operationId: updateStolpersteine
+      parameters:
+        - name: stolpersteinId
+          in: path
+          description: ID of explicit Stolperstein
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StolpersteineReqDto'
+      responses:
+        200:
+          description: update was successfully and return updated object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StolpersteineResponseDto'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        404:
+          description: When a Stolperstein is not existing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+  /api/secured/requests:
+    get:
+      tags:
+        - Secured
+      summary: Load all existing Requests
+      description: Load all existing Requests for adding Stolperstein-Informations to the System
+      operationId: getStolpersteinRequests
+      responses:
+        200:
+          description: all existing requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponseDto'
+        403:
+          description: Forbidden - the Resource is only available for a specific role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+  /api/secured/requests/{requestId}/approve:
+    post:
+      tags:
+        - Secured
+      summary: Approve Request for Id
+      description: Approve referenced Request and activate Stolperstein
+      operationId: approveRequest
+      parameters:
+        - name: requestId
+          in: path
+          description: ID of Request
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Request is approved and Stolperstein active
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponseDto'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        404:
+          description: Request for Id was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        403:
+          description: Forbidden - the Resource is only available for a specific role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+  /api/secured/requests/{requestId}/reject:
+    post:
+      tags:
+        - Secured
+      summary: Reject Request for Id
+      description: Reject referenced Request and don't activate Stolperstein
+      operationId: rejectRequest
+      parameters:
+        - name: requestId
+          in: path
+          description: ID of Request
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  nullable: false
+                  type: string
+                  description: Reason why Request is rejected
+                  example: Die Bilder entsprechen nicht unseren Richtlinien.
+                  maxLength: 512
+                informRequester:
+                  type: boolean
+                  description: If the requester should be informed, that the Request is rejected
+      responses:
+        200:
+          description: Request is reject
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponseDto'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        404:
+          description: Request for Id was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        403:
+          description: Forbidden - the Resource is only available for a specific role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+  /api/secured/photos/resourceGroup/{groupID}:
+    get:
+      tags:
+        - Secured
+      summary: Load Photos for within resource group
+      description: Load All existing Photos as a Resource Group for the Group-ID
+      operationId: getPhotosForGroupId
+      parameters:
+        - name: groupID
+          in: path
+          description: ID of a Resource Group
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: All available Photos under referenced Resource-Group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourcePhotoDto'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        404:
+          description: Resource Group was not found for Id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+  /api/secured/photos/upload:
+    post:
+      tags:
+        - Secured
+      summary: Upload Photos
+      description: Upload Photos
+      operationId: uploadPhotos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhotoUploadReqDto'
+      responses:
+        200:
+          description: Return information when upload was successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoUploadResponseDto'
+        400:
+          description: Bad Request when no valid request was send
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+components:
+  schemas:
+    ProblemDto:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          example: 400
+        description:
+          type: string
+          example: Bad Request - Missing Parameter
+    VictimReqDto:
+      type: object
+      required:
+        - firstname
+        - lastname
+        - dateOfBirth
+        - dateOfDeath
+      properties:
+        firstname:
+          type: string
+          example: Max
+        lastname:
+          type: string
+          example: Mustermann
+        dateOfBirth:
+          type: string
+          format: date
+          example: 1933-12-21
+        dateOfDeath:
+          type: string
+          format: date
+          example: 1942-02-23
+    AddressReqDto:
+      type: object
+      required:
+        - streetName
+        - houseNumber
+        - postCode
+      properties:
+        streetName:
+          type: string
+          example: Mustermann-Strasse
+        houseNumber:
+          type: string
+          maxLength: 4
+          minLength: 1
+          example: 12a
+        postCode:
+          type: string
+          maxLength: 5
+          minLength: 5
+          example: 97074
+        city:
+          type: string
+          example: Wuerzburg
+    PhotoReqDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 232
+    StolpersteineReqDto:
+      type: object
+      required:
+        - description
+        - position
+        - victim
+      properties:
+        description:
+          type: string
+          example: That is an example of a stolperstein description
+        position:
+          type: object
+          required:
+            - lat
+            - lng
+          properties:
+            lat:
+              type: number
+              format: float
+              example: 90.233232
+            lng:
+              type: number
+              format: float
+              example: 23.232232
+        victim:
+          $ref: '#/components/schemas/VictimReqDto'
+        address:
+          $ref: '#/components/schemas/AddressReqDto'
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhotoReqDto'
+
+    VictimResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 232
+        firstname:
+          type: string
+          example: Max
+        lastname:
+          type: string
+          example: Mustermann
+        dateOfBirth:
+          type: string
+          format: date
+          example: 1933-12-21
+        dateOfDeath:
+          type: string
+          format: date
+          example: 1942-02-23
+    AddressResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 232
+        streetName:
+          type: string
+          example: "Mustermannstrasse"
+        houseNumber:
+          type: string
+          maxLength: 4
+          minLength: 1
+          example: 12a
+        postCode:
+          type: string
+          maxLength: 5
+          minLength: 5
+          example: 97074
+        city:
+          type: string
+          example: Wuerzburg
+    PhotoResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 232
+        heading:
+          type: integer
+          description: representing the heading on a compass for N, W, E, S
+          format: int16
+          example: 90
+        resourceUrl:
+          type: string
+          description: specific path to resource to download the file
+          example: "/232/example-crypt-3s2323.jpeg"
+        resourceGroup:
+          type: string
+          description: representing the group where all available resources can be loaded as once
+          example: "/232"
+    StolpersteineResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1023
+        description:
+          type: string
+          example: That is an example of a stolperstein description
+        position:
+          type: object
+          properties:
+            lat:
+              type: number
+              format: float
+              example: 90.233232
+            lng:
+              type: number
+              format: float
+              example: 23.232232
+        victim:
+          $ref: '#/components/schemas/VictimResponseDto'
+        address:
+          $ref: '#/components/schemas/AddressResponseDto'
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhotoResponseDto'
+    RequestResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 3232
+        status:
+          type: string
+          enum:
+            - REQUESTED
+            - APPROVED
+            - REJECTED
+        requester:
+          type: object
+          properties:
+            firstname:
+              type: string
+              example: Max
+            lastname:
+              type: string
+              example: Mustermann
+        requestedStolperstein:
+          $ref: '#/components/schemas/StolpersteineResponseDto'
+    ResourcePhotoDto:
+      description: The Entity of one Photo
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 2322
+        photo:
+          type: string
+          format: binary
+    ResourceGroupPhotoDto:
+      description: List of the Resource-Photo loaded
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourcePhotoDto'
+    PhotoUploadDto:
+      description: Photo Upload Request Object
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+    PhotoUploadReqDto:
+      description: Upload List
+      type: array
+      minimum: 1
+      items:
+        $ref: '#/components/schemas/PhotoUploadDto'
+    PhotoUploadResponseDto:
+      description: Response after an successful Upload
+      type: object
+      properties:
+        resourceGroupId:
+          type: integer
+          format: int64
+          description: ID of Resource Group, how the complete Upload is downloadable
+          example: 232
+        downloadURI:
+          type: string
+          description: downloadURI for download the complete ResourceGroup
+          example: /api/secured/photos/resourceGroup/232

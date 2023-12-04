@@ -55,5 +55,58 @@
             <artifactId>liquibase-core</artifactId>
             <version>${liquibase.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.2.19</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.6</version>
+        </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.1.0</version>
+                <configuration>
+                    <generatorName>spring</generatorName>
+                    <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json</configurationFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>arstolpersteine-secured-api</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/api/arstolpersteine-secured.openapi-spec.yml
+                            </inputSpec>
+                            <apiPackage>com.thws.arstolpersteine.gen.api.secured</apiPackage>
+                            <modelPackage>com.thws.arstolpersteine.gen.api.secured.model</modelPackage>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>arstolpersteine-public-api</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/api/arstolpersteine-public.openapi-spec.yml
+                            </inputSpec>
+                            <apiPackage>com.thws.arstolpersteine.gen.api.publicApi</apiPackage>
+                            <modelPackage>com.thws.arstolpersteine.gen.api.publicApi.model</modelPackage>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
