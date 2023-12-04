@@ -49,6 +49,4 @@ backend:
 
 server:
   port: 8580
-  servlet:
-    context-path: /api
 

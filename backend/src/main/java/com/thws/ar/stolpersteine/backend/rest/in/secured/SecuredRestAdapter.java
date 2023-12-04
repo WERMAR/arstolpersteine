@@ -1,9 +1,9 @@
 package com.thws.ar.stolpersteine.backend.rest.in.secured;
 
 
-import com.thws.arstolpersteine.gen.api.SecuredApi;
-import com.thws.arstolpersteine.gen.api.model.StolpersteineReqDto;
-import com.thws.arstolpersteine.gen.api.model.StolpersteineResponseDto;
+import com.thws.arstolpersteine.gen.api.secured.SecuredApi;
+import com.thws.arstolpersteine.gen.api.secured.model.StolpersteineReqDto;
+import com.thws.arstolpersteine.gen.api.secured.model.StolpersteineResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-public class StolpersteinRestAdapter implements SecuredApi {
+public class SecuredRestAdapter implements SecuredApi {
 
     @Secured({"USER", "ADMIN"})
     @Override
@@ -21,10 +21,10 @@ public class StolpersteinRestAdapter implements SecuredApi {
         return ResponseEntity.ok(StolpersteineResponseDto.builder().id(232L).build());
     }
 
-    @Secured({"USER", "ADMIN"})
+    @Secured({"USER"})
     @Override
     public ResponseEntity<List<StolpersteineResponseDto>> getStolpersteineForUser(Integer userId) {
         log.debug("UserId: {}", userId);
-        return ResponseEntity.ok(List.of(StolpersteineResponseDto.builder().id(232L).build()));
+        return ResponseEntity.ok(List.of());
     }
 }

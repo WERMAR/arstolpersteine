@@ -1,24 +1,44 @@
 openapi: 3.0.0
 info:
-  title: Secured AR-Stolperstein API
-  description: This is the secured OpenAPI Specification for the AR-Stolpersteine Backend
+  title: Public AR-Stolperstein API
+  description: This is the Public OpenAPI Specification for the AR-Stolpersteine Backend. Every Endpoint is without an Authentication accessible
   version: 1.0.0
 paths:
-  /secured/stolpersteine/{userId}:
+  /api/public/stolpersteine:
     get:
-      summary: Get Stolpersteine for User
-      description: Get all available Stolpersteine for an User
+      tags:
+        - Public
+      summary: Get Stolpersteine in a specific radius
+      description: Get Stolpersteine in a specific radius (e.g. 500m)
       operationId: getStolpersteineForUser
       parameters:
-        - name: userId
-          in: path
-          description: ID of User
+        - name: radius
+          in: query
+          description: Area around current User-Location
           required: true
           schema:
             type: integer
+            description: Number represent radius in meters
+            example: 200
+        - name: latUser
+          in: query
+          description: Lat-Coordinate from current User-Location
+          required: true
+          schema:
+            type: number
+            format: float
+            example: 90.233232
+        - name: lngUser
+          in: query
+          description: Lng-Coordinate from current User-Location
+          required: true
+          schema:
+            type: number
+            format: float
+            example: 45.233232
       responses:
         200:
-          description: return all stolpersteine based on userId
+          description: return all stolpersteine based on current user location and radius
           content:
             application/json:
               schema:
@@ -26,7 +46,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/StolpersteineResponseDto'
         400:
-          description: Bad Request when no userID was provided
+          description: Bad Request - All Query-Params need to be set
           content:
             application/json:
               schema:
@@ -258,9 +278,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDto'
-  /api/secured/photos/resourceGroup/{groupID}:
-    get:
-      summary: Load Photos for within resource group
 components:
   schemas:
     ProblemDto:

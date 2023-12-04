@@ -72,30 +72,23 @@
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>7.1.0</version>
+                <configuration>
+                    <generatorName>spring</generatorName>
+                    <configurationFile>${project.basedir}/src/main/resources/openapi-generator-config.json</configurationFile>
+                </configuration>
                 <executions>
                     <execution>
+                        <id>arstolpersteine-secured-api</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <generateApiDocumentation>true</generateApiDocumentation>
-                            <generateApis>true</generateApis>
                             <inputSpec>
                                 ${project.basedir}/src/main/resources/api/arstolpersteine-secured.openapi-spec.yml
                             </inputSpec>
-                            <generatorName>spring</generatorName>
-                            <apiPackage>com.thws.arstolpersteine.gen.api</apiPackage>
-                            <modelPackage>com.thws.arstolpersteine.gen.api.model</modelPackage>
-                            <configOptions>
-                                <library>spring-boot</library>
-                                <additionalModelTypeAnnotations>@lombok.NoArgsConstructor;@lombok.AllArgsConstructor;@lombok.Builder</additionalModelTypeAnnotations>
-                                <useSpringBoot3>true</useSpringBoot3>
-                                <interfaceOnly>true</interfaceOnly>
-                                <modelTests>false</modelTests>
-                                <apiTests>false</apiTests>
-                                <lombok>true</lombok>
-                                <generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
-                            </configOptions>
+                            <apiPackage>com.thws.arstolpersteine.gen.api.secured</apiPackage>
+                            <modelPackage>com.thws.arstolpersteine.gen.api.secured.model</modelPackage>
+                            <generateSupportingFiles>false</generateSupportingFiles>
                         </configuration>
                     </execution>
                 </executions>
