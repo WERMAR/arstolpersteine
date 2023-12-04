@@ -203,7 +203,7 @@ paths:
         - Secured
       summary: Reject Request for Id
       description: Reject referenced Request and don't activate Stolperstein
-      operationId: approveRequest
+      operationId: rejectRequest
       parameters:
         - name: requestId
           in: path
@@ -260,7 +260,81 @@ paths:
                 $ref: '#/components/schemas/ProblemDto'
   /api/secured/photos/resourceGroup/{groupID}:
     get:
+      tags:
+        - Secured
       summary: Load Photos for within resource group
+      description: Load All existing Photos as a Resource Group for the Group-ID
+      operationId: getPhotosForGroupId
+      parameters:
+        - name: groupID
+          in: path
+          description: ID of a Resource Group
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: All available Photos under referenced Resource-Group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourcePhotoDto'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        404:
+          description: Resource Group was not found for Id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+  /api/secured/photos/upload:
+    post:
+      tags:
+        - Secured
+      summary: Load Photos for within resource group
+      description: Load All existing Photos as a Resource Group for the Group-ID
+      operationId: getPhotosForGroupId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhotoUploadReqDto'
+      responses:
+        200:
+          description: Return information when upload was successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoUploadResponseDto'
+        400:
+          description: Bad Request when no valid request was send
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
 components:
   schemas:
     ProblemDto:
@@ -474,5 +548,45 @@ components:
               example: Mustermann
         requestedStolperstein:
           $ref: '#/components/schemas/StolpersteineResponseDto'
-
-
+    ResourcePhotoDto:
+      description: The Entity of one Photo
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 2322
+        photo:
+          type: string
+          format: binary
+    ResourceGroupPhotoDto:
+      description: List of the Resource-Photo loaded
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourcePhotoDto'
+    PhotoUploadDto:
+      description: Photo Upload Request Object
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+    PhotoUploadReqDto:
+      description: Upload List
+      type: array
+      minimum: 1
+      items:
+        $ref: '#/components/schemas/PhotoUploadDto'
+    PhotoUploadResponseDto:
+      description: Response after an successful Upload
+      type: object
+      properties:
+        resourceGroupId:
+          type: integer
+          format: int64
+          description: ID of Resource Group, how the complete Upload is downloadable
+          example: 232
+        downloadURI:
+          type: string
+          description: downloadURI for download the complete ResourceGroup
+          example: /api/secured/photos/resourceGroup/232
