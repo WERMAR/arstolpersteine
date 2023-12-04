@@ -91,6 +91,20 @@
                             <generateSupportingFiles>false</generateSupportingFiles>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>arstolpersteine-public-api</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/api/arstolpersteine-public.openapi-spec.yml
+                            </inputSpec>
+                            <apiPackage>com.thws.arstolpersteine.gen.api.publicApi</apiPackage>
+                            <modelPackage>com.thws.arstolpersteine.gen.api.publicApi.model</modelPackage>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>

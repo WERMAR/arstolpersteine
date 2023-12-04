@@ -4,8 +4,10 @@ info:
   description: This is the secured OpenAPI Specification for the AR-Stolpersteine Backend
   version: 1.0.0
 paths:
-  /secured/stolpersteine/{userId}:
+  /api/secured/stolpersteine/{userId}:
     get:
+      tags:
+        - Secured
       summary: Get Stolpersteine for User
       description: Get all available Stolpersteine for an User
       operationId: getStolpersteineForUser
@@ -307,9 +309,9 @@ paths:
     post:
       tags:
         - Secured
-      summary: Load Photos for within resource group
-      description: Load All existing Photos as a Resource Group for the Group-ID
-      operationId: getPhotosForGroupId
+      summary: Upload Photos
+      description: Upload Photos
+      operationId: uploadPhotos
       requestBody:
         required: true
         content:

@@ -2,8 +2,7 @@ package com.thws.ar.stolpersteine.backend.rest.in.secured;
 
 
 import com.thws.arstolpersteine.gen.api.secured.SecuredApi;
-import com.thws.arstolpersteine.gen.api.secured.model.StolpersteineReqDto;
-import com.thws.arstolpersteine.gen.api.secured.model.StolpersteineResponseDto;
+import com.thws.arstolpersteine.gen.api.secured.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -15,16 +14,44 @@ import java.util.List;
 @Slf4j
 public class SecuredRestAdapter implements SecuredApi {
 
-    @Secured({"USER", "ADMIN"})
+
     @Override
     public ResponseEntity<StolpersteineResponseDto> addStolpersteinForUser(Integer userId, StolpersteineReqDto stolpersteineReqDto) {
-        return ResponseEntity.ok(StolpersteineResponseDto.builder().id(232L).build());
+        return null;
     }
 
-    @Secured({"USER"})
+    @Override
+    public ResponseEntity<RequestResponseDto> approveRequest(Integer requestId) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<ResourcePhotoDto> getPhotosForGroupId(Integer groupID) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<RequestResponseDto> getStolpersteinRequests() {
+        return null;
+    }
+
     @Override
     public ResponseEntity<List<StolpersteineResponseDto>> getStolpersteineForUser(Integer userId) {
-        log.debug("UserId: {}", userId);
-        return ResponseEntity.ok(List.of());
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<RequestResponseDto> rejectRequest(Integer requestId, RejectRequestRequest rejectRequestRequest) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<StolpersteineResponseDto> updateStolpersteine(Integer stolpersteinId, StolpersteineReqDto stolpersteineReqDto) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<PhotoUploadResponseDto> uploadPhotos(List<PhotoUploadDto> photoUploadDto) {
+        return null;
     }
 }
