@@ -2,3 +2,6 @@ databaseChangeLog:
   - include:
       file: db.changelog-0211232320-initialScript.yaml
       relativeToChangelogFile: true
+  - include:
+      file: db.changelog-0512230315-add-overpass-db.yaml
+      relativeToChangelogFile: true
