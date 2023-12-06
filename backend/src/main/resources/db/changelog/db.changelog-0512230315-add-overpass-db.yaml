@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0512230315-add-overpass-db
+      author: Marcel Wernisch
+      changes:
+        - createTable:
+            tableName: overpass_stolperstein
+            columns:
+              - column:
+                  name: overpass_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: lng
+                  type: FLOAT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lat
+                  type: FLOAT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: country
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: housenumber
+                  type: VARCHAR(4)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: postcode
+                  type: VARCHAR(6)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: street
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: suburb
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: memorial_text
+                  type: VARCHAR(512)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: victim_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: date_of_birth
+                  type: VARCHAR(80)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: date_of_death
+                  type: VARCHAR(80)
+                  constraints:
+                    nullable: true
