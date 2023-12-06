@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "stolpersteineAR-FE:build:production"
+              "buildTarget": "stolpersteineAR-FE:build:production"
             },
             "development": {
-              "browserTarget": "stolpersteineAR-FE:build:development"
+              "buildTarget": "stolpersteineAR-FE:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "stolpersteineAR-FE:build"
+            "buildTarget": "stolpersteineAR-FE:build"
           }
         },
         "test": {
