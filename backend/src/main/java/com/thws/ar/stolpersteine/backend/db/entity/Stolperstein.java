@@ -12,7 +12,8 @@ public class Stolperstein {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer stolperstein_id;
+    @Column(name = "stolperstein_id")
+    private Integer stolpersteinId;
 
     @Column(name = "description")
     private String description;

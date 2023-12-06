@@ -1,9 +1,13 @@
 package com.thws.ar.stolpersteine.backend.rest.in.secured;
 
 
-import com.thws.ar.stolpersteine.backend.service.OverpassService;
-import com.thws.arstolpersteine.gen.api.secured.SecuredApi;
-import com.thws.arstolpersteine.gen.api.secured.model.*;
+import com.thws.ar.stolpersteine.backend.service.port.StolpersteinPort;
+import com.thws.arstolpersteine.gen.api.publicApi.model.StolpersteinListResponseDtoPosition;
+import com.thws.arstolpersteine.gen.api.secured.SecuredStolpersteineApi;
+import com.thws.arstolpersteine.gen.api.secured.model.StolpersteinPositionDto;
+import com.thws.arstolpersteine.gen.api.secured.model.StolpersteineReqDto;
+import com.thws.arstolpersteine.gen.api.secured.model.StolpersteineResponseDto;
+import com.thws.arstolpersteine.gen.api.secured.model.SyncOverpassAPI200Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -15,27 +19,20 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class SecuredRestAdapter implements SecuredApi {
-    private final OverpassService overpassService;
+public class StolpersteinRestAdapater implements SecuredStolpersteineApi {
+    private final StolpersteinPort stolpersteinPort;
 
     @Override
     public ResponseEntity<StolpersteineResponseDto> addStolpersteinForUser(Integer userId, StolpersteineReqDto stolpersteineReqDto) {
         return null;
     }
 
+    @Secured({"USER", "ADMIN"})
     @Override
-    public ResponseEntity<RequestResponseDto> approveRequest(Integer requestId) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<ResourcePhotoDto> getPhotosForGroupId(Integer groupID) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<RequestResponseDto> getStolpersteinRequests() {
-        return null;
+    public ResponseEntity<List<StolpersteinPositionDto>> getAllStolpersteine() {
+        log.info("Get All Stolpersteine currently in the System available");
+        var result = stolpersteinPort.getAllStolpersteinPositions();
+        return ResponseEntity.ok(result);
     }
 
     @Override
@@ -43,26 +40,16 @@ public class SecuredRestAdapter implements SecuredApi {
         return null;
     }
 
-    @Override
-    public ResponseEntity<RequestResponseDto> rejectRequest(Integer requestId, RejectRequestRequest rejectRequestRequest) {
-        return null;
-    }
-
     @Secured("ADMIN")
     @Override
     public ResponseEntity<SyncOverpassAPI200Response> syncOverpassAPI() {
         log.info("Overpass API Synchronization started");
-        var importCounter = this.overpassService.synchronizeStolpersteine();
+        var importCounter = this.stolpersteinPort.synchroniseOverpassAPI();
         return ResponseEntity.ok(SyncOverpassAPI200Response.builder().recordCounter(importCounter).build());
     }
 
     @Override
     public ResponseEntity<StolpersteineResponseDto> updateStolpersteine(Integer stolpersteinId, StolpersteineReqDto stolpersteineReqDto) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<PhotoUploadResponseDto> uploadPhotos(List<PhotoUploadDto> photoUploadDto) {
         return null;
     }
 }

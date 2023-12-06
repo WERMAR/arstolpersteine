@@ -3,11 +3,13 @@ info:
   title: Secured AR-Stolperstein API
   description: This is the secured OpenAPI Specification for the AR-Stolpersteine Backend
   version: 1.0.0
+servers:
+  - url: 'http://localhost:8580'
 paths:
   /api/secured/stolpersteine/synchronize:
     get:
       tags:
-        - Secured
+        - SecuredStolpersteine
       summary: Synchronize the Database with existing Overpass API
       operationId: syncOverpassAPI
       responses:
@@ -27,10 +29,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDto'
+  /api/secured/stolpersteine:
+    get:
+      tags:
+        - SecuredStolpersteine
+      summary: Get Stolpersteine all existing Stolpersteine
+      description: Get all available Stolpersteine (combine overpass-stolpersteine and own managed)
+      operationId: getAllStolpersteine
+      responses:
+        200:
+          description: return all stolpersteine based on userId
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StolpersteinPositionDto'
+        400:
+          description: Bad Request when no userID was provided
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        404:
+          description: If no Stolpersteine for UserId was found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
   /api/secured/stolpersteine/{userId}:
     get:
       tags:
-        - Secured
+        - SecuredStolpersteine
       summary: Get Stolpersteine for User
       description: Get all available Stolpersteine for an User
       operationId: getStolpersteineForUser
@@ -70,7 +106,7 @@ paths:
                 $ref: '#/components/schemas/ProblemDto'
     post:
       tags:
-        - Secured
+        - SecuredStolpersteine
       summary: Create a new Stolpersteine for given userId
       description: Get all available Stolpersteine for an User
       operationId: addStolpersteinForUser
@@ -109,7 +145,7 @@ paths:
   /api/secured/stolpersteine/update/{stolpersteinId}:
     put:
       tags:
-        - Secured
+        - SecuredStolpersteine
       summary: Update a existing Stolpersteine
       description: Update a existing Stolperstein for given Id
       operationId: updateStolpersteine
@@ -154,7 +190,7 @@ paths:
   /api/secured/requests:
     get:
       tags:
-        - Secured
+        - SecuredRequests
       summary: Load all existing Requests
       description: Load all existing Requests for adding Stolperstein-Informations to the System
       operationId: getStolpersteinRequests
@@ -180,7 +216,7 @@ paths:
   /api/secured/requests/{requestId}/approve:
     post:
       tags:
-        - Secured
+        - SecuredRequests
       summary: Approve Request for Id
       description: Approve referenced Request and activate Stolperstein
       operationId: approveRequest
@@ -225,7 +261,7 @@ paths:
   /api/secured/requests/{requestId}/reject:
     post:
       tags:
-        - Secured
+        - SecuredRequests
       summary: Reject Request for Id
       description: Reject referenced Request and don't activate Stolperstein
       operationId: rejectRequest
@@ -286,7 +322,7 @@ paths:
   /api/secured/photos/resourceGroup/{groupID}:
     get:
       tags:
-        - Secured
+        - SecuredPhotos
       summary: Load Photos for within resource group
       description: Load All existing Photos as a Resource Group for the Group-ID
       operationId: getPhotosForGroupId
@@ -331,7 +367,7 @@ paths:
   /api/secured/photos/upload:
     post:
       tags:
-        - Secured
+        - SecuredPhotos
       summary: Upload Photos
       description: Upload Photos
       operationId: uploadPhotos
@@ -615,3 +651,22 @@ components:
           type: string
           description: downloadURI for download the complete ResourceGroup
           example: /api/secured/photos/resourceGroup/232
+    StolpersteinPositionDto:
+      description: Object which represents only a single point of a stolperstein without any further informations
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1023
+        position:
+          type: object
+          properties:
+            lat:
+              type: number
+              format: float
+              example: 90.233232
+            lng:
+              type: number
+              format: float
+              example: 23.232232
