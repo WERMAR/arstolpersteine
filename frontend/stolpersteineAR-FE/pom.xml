@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.thws.ar.stolpersteine</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>arstolpersteine-frontend</artifactId>
+  <name>frontend</name>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>6.6.0</version>
+        <configuration>
+          <generatorName>typescript-angular</generatorName>
+          <output>{project.basedir}/src/app/gen</output>
+          <configOptions>
+            <ngVersion>17.0.6</ngVersion>
+            <npmVersion>8.19.3</npmVersion>
+            <documentationProvider>springdoc</documentationProvider>
+            <interfaceOnly>true</interfaceOnly>
+            <skipDefaultInterface>true</skipDefaultInterface>
+            <openApiNullable>false</openApiNullable>
+            <useTags>true</useTags>
+            <fileNaming>kebab-case</fileNaming>
+          </configOptions>
+        </configuration>
+        <executions>
+          <execution>
+            <id>arstolpersteine-secured-api</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>
+                ${project.basedir}/api/arstolpersteine-secured.openapi-spec.yml
+              </inputSpec>
+              <output>${project.basedir}/src/app/gen/secured-api</output>
+              <configOptions>
+                <apiModulePrefix>SecuredApi</apiModulePrefix>
+              </configOptions>
+            </configuration>
+          </execution>
+          <execution>
+            <id>arstolpersteine-public-api</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.basedir}/api/arstolpersteine-public.openapi-spec.yml</inputSpec>
+              <output>${project.basedir}/src/app/gen/public-api</output>
+              <configOptions>
+                <apiModulePrefix>PublicAPI</apiModulePrefix>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

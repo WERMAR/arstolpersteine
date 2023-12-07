@@ -92,3 +92,5 @@ Carthage/
 *.lock
 *.xcuserdatad/
 *.idea/
+
+gen

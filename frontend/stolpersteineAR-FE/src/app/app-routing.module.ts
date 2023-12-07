@@ -3,15 +3,24 @@ import {RouterModule, Routes} from '@angular/router';
 import {ReviewPageComponent} from "./admin/views/review-page/review-page.component";
 import {AppComponent} from "./app.component";
 import {HomeComponent} from "./home/home.component";
+import {StolpersteineComponent} from "./home/stolpersteine/stolpersteine.component";
+import {AuthGuard} from "./guard/auth.guard";
 
 const routes: Routes = [
   {
     path: 'admin/review',
-    component: ReviewPageComponent
+    component: ReviewPageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'home/stolpersteine',
+    component: StolpersteineComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '',
