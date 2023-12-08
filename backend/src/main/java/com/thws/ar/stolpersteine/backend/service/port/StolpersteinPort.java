@@ -9,5 +9,6 @@ import java.util.List;
 public interface StolpersteinPort {
 
     List<StolpersteinPositionDto> getAllStolpersteinPositions();
+    StolpersteineResponseDto getStolpersteinForId(Long stolpersteinId);
     int synchroniseOverpassAPI();
 }

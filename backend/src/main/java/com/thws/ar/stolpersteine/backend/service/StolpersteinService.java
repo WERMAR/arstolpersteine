@@ -8,6 +8,7 @@ import com.thws.ar.stolpersteine.backend.service.port.StolpersteinPort;
 import com.thws.arstolpersteine.gen.api.secured.model.StolpersteinPositionDto;
 import com.thws.arstolpersteine.gen.api.secured.model.StolpersteineResponseDto;
 import com.thws.arstolpersteine.gen.api.secured.model.StolpersteineResponseDtoPosition;
+import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,19 @@ public class StolpersteinService implements StolpersteinPort {
         var mappedPositionListOverpassStream = overpassStolpersteine.stream().map(stolpersteinDtoMapper::toPositionDto);
         var mappedPositionListStolpersteineStream = stolpersteine.stream().map(stolpersteinDtoMapper::toPositionDto);
         return Stream.concat(mappedPositionListStolpersteineStream, mappedPositionListOverpassStream).toList();
+    }
+
+    @Override
+    public StolpersteineResponseDto getStolpersteinForId(Long stolpersteinId) {
+        var stolpersteinOverpassOpt = this.overpassStolpersteinRepository.findById(stolpersteinId);
+        if (stolpersteinOverpassOpt.isPresent()) {
+            return stolpersteinDtoMapper.toStolpersteinDto(stolpersteinOverpassOpt.get());
+        }
+        var stolpersteinOpt = this.stolpersteinRepository.findById(stolpersteinId);
+        if (stolpersteinOpt.isPresent()) {
+            return stolpersteinDtoMapper.toStolpersteinDto(stolpersteinOpt.get());
+        }
+        throw new NotFoundException();
     }
 
     @Override

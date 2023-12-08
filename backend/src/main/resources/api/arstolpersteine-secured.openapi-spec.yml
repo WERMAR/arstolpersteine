@@ -69,50 +69,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDto'
-  /api/secured/stolpersteine/{userId}:
-    get:
-      tags:
-        - SecuredStolpersteine
-      summary: Get Stolpersteine for User
-      description: Get all available Stolpersteine for an User
-      operationId: getStolpersteineForUser
-      security:
-        - KeycloakAuth:
-            - USER
-      parameters:
-        - name: userId
-          in: path
-          description: ID of User
-          required: true
-          schema:
-            type: integer
-      responses:
-        200:
-          description: return all stolpersteine based on userId
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/StolpersteineResponseDto'
-        400:
-          description: Bad Request when no userID was provided
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDto'
-        404:
-          description: If no Stolpersteine for UserId was found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDto'
-        500:
-          description: Internal Server Errors
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDto'
     post:
       tags:
         - SecuredStolpersteine
@@ -144,6 +100,49 @@ paths:
                 $ref: '#/components/schemas/StolpersteineResponseDto'
         400:
           description: Bad Request when no valid request was send
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+  /api/secured/stolpersteine/{stolpersteinId}:
+    get:
+      tags:
+        - SecuredStolpersteine
+      summary: Get Stolpersteine for Id
+      description: Get Stolpersteine for given Id
+      operationId: getStolpersteinForId
+      parameters:
+        - name: stolpersteinId
+          in: path
+          description: ID of Stolperstein
+          required: true
+          schema:
+            type: integer
+            format: int64
+      security:
+        - KeycloakAuth:
+            - USER
+      responses:
+        200:
+          description: get stolperstein for given Id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StolpersteineResponseDto'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        404:
+          description: If no Stolpersteine existing for Id
           content:
             application/json:
               schema:
@@ -685,6 +684,11 @@ components:
       description: Response after an successful Upload
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
+          description: ID of Photo
+          example: 232343
         resourceGroupId:
           type: integer
           format: int64

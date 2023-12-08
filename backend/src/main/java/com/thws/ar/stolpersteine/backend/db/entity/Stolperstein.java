@@ -13,7 +13,7 @@ public class Stolperstein {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "stolperstein_id")
-    private Integer stolpersteinId;
+    private Long stolpersteinId;
 
     @Column(name = "description")
     private String description;
@@ -27,13 +27,11 @@ public class Stolperstein {
     @Column(name = "active")
     private boolean active;
 
-    @ManyToOne
-    @JoinColumn(name = "approved_user")
-    private User approvedUser;
+    @Column(name = "approved_user_name")
+    private String approvedUsername;
 
-    @ManyToOne
-    @JoinColumn(name = "created_user")
-    private User createdUser;
+    @Column(name = "created_user_name")
+    private String createdUsername;
 
     @OneToOne(targetEntity = Address.class)
     @JoinColumn(name = "address_id")

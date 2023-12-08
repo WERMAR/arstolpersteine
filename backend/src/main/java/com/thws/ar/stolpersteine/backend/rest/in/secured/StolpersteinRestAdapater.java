@@ -2,7 +2,6 @@ package com.thws.ar.stolpersteine.backend.rest.in.secured;
 
 
 import com.thws.ar.stolpersteine.backend.service.port.StolpersteinPort;
-import com.thws.arstolpersteine.gen.api.publicApi.model.StolpersteinListResponseDtoPosition;
 import com.thws.arstolpersteine.gen.api.secured.SecuredStolpersteineApi;
 import com.thws.arstolpersteine.gen.api.secured.model.StolpersteinPositionDto;
 import com.thws.arstolpersteine.gen.api.secured.model.StolpersteineReqDto;
@@ -35,9 +34,12 @@ public class StolpersteinRestAdapater implements SecuredStolpersteineApi {
         return ResponseEntity.ok(result);
     }
 
+    @Secured("USER")
     @Override
-    public ResponseEntity<List<StolpersteineResponseDto>> getStolpersteineForUser(Integer userId) {
-        return null;
+    public ResponseEntity<StolpersteineResponseDto> getStolpersteinForId(Long stolpersteinId) {
+        log.info("Receive Stolperstein for given Id: {}", stolpersteinId);
+        var stolperstein = this.stolpersteinPort.getStolpersteinForId(stolpersteinId);
+        return ResponseEntity.ok(stolperstein);
     }
 
     @Secured("ADMIN")
