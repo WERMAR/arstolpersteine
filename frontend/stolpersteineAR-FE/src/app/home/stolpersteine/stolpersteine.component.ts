@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {SecuredStolpersteineService} from "../../gen/secured-api";
+import {SecuredStolpersteineService, StolpersteineResponseDto} from "../../gen/secured-api";
 import {PublicService} from "../../gen/public-api";
 import {MarkerMapsModel} from "../../shared/model/marker-maps.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-stolpersteine',
@@ -10,7 +11,8 @@ import {MarkerMapsModel} from "../../shared/model/marker-maps.model";
 })
 export class StolpersteineComponent implements OnInit {
 
-  constructor(private readonly stolpersteinService: SecuredStolpersteineService, private publicService: PublicService) {
+  constructor(private readonly stolpersteinService: SecuredStolpersteineService,
+              private readonly router: Router) {
   }
 
   markers: MarkerMapsModel[] = []
@@ -24,6 +26,8 @@ export class StolpersteineComponent implements OnInit {
     minZoom: 4,
   };
 
+  selectedStolperstein: StolpersteineResponseDto | undefined;
+
   ngOnInit() {
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
@@ -31,6 +35,7 @@ export class StolpersteineComponent implements OnInit {
         lng: position.coords.longitude,
       };
     });
+
     this.stolpersteinService.getAllStolpersteine().subscribe((val) => {
       console.log(val);
       val.map(e => {
@@ -46,15 +51,15 @@ export class StolpersteineComponent implements OnInit {
     })
   }
 
-  zoomIn() {
-    if (this.zoom < this.options.maxZoom!) this.zoom++;
-  }
-
-  zoomOut() {
-    if (this.zoom > this.options.minZoom!) this.zoom--;
-  }
-
   onSelectMarker(id: number) {
     console.log("Selected ID: " + id);
+    this.stolpersteinService.getStolpersteinForId(id).subscribe(response => {
+      console.log(response);
+      this.selectedStolperstein = response;
+    });
+  }
+
+  onRedirectToManage() {
+    this.router.navigateByUrl('/home/stolpersteine/manage', {state: {stolpersteinId: this.selectedStolperstein?.id}}).then()
   }
 }

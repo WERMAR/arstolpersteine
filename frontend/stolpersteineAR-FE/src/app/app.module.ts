@@ -16,6 +16,15 @@ import {GoogleMapsModule} from "@angular/google-maps";
 import {initializeKeycloak} from "./init/keycloak-init.factory";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {HttpClientModule} from "@angular/common/http";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {
+  StolpersteinManageViewComponent
+} from "./home/stolpersteine/stolperstein-manage-view/stolperstein-manage-view.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
   declarations: [
@@ -23,7 +32,7 @@ import {HttpClientModule} from "@angular/common/http";
     ReviewPageComponent,
     HomeComponent,
     StolpersteineComponent,
-
+    StolpersteinManageViewComponent
   ],
   imports: [
     HttpClientModule,
@@ -34,9 +43,15 @@ import {HttpClientModule} from "@angular/common/http";
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatToolbarModule,
     GoogleMapsModule,
     KeycloakAngularModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatChipsModule,
   ],
   providers: [
     {
