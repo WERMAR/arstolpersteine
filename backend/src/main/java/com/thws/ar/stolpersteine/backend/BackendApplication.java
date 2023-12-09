@@ -7,8 +7,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @ConfigurationPropertiesScan
 @SpringBootApplication
@@ -24,5 +27,4 @@ public class BackendApplication {
         var strategies = ExchangeStrategies.builder().codecs(codecs -> codecs.defaultCodecs().maxInMemorySize(size)).build();
         return WebClient.builder().baseUrl("https://overpass-api.de/api/").exchangeStrategies(strategies).build();
     }
-
 }

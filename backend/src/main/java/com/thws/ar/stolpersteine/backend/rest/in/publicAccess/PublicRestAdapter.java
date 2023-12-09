@@ -17,6 +17,7 @@ public class PublicRestAdapter implements PublicApi {
 
     @Override
     public ResponseEntity<StolpersteineResponseDto> getStolpersteinForID(Integer stolpersteinId) {
+        log.info("Called " + stolpersteinId);
         return null;
     }
 

@@ -31,7 +31,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
-              "@angular/material/prebuilt-themes/purple-green.css",
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -65,12 +65,16 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "arstolpersteine-fe:build",
+            "proxyConfig": "./proxy.conf.json"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "stolpersteineAR-FE:build:production"
+              "buildTarget": "stolpersteineAR-FE:build:production"
             },
             "development": {
-              "browserTarget": "stolpersteineAR-FE:build:development"
+              "buildTarget": "stolpersteineAR-FE:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "stolpersteineAR-FE:build"
+            "buildTarget": "stolpersteineAR-FE:build"
           }
         },
         "test": {

@@ -12,7 +12,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer address_id;
+    private Long address_id;
 
     @Column(name = "street_name")
     private String streetName;
