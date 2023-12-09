@@ -360,13 +360,16 @@ paths:
           required: true
           schema:
             type: integer
+            format: int64
       responses:
         200:
           description: All available Photos under referenced Resource-Group
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourcePhotoDto'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourcePhotoDto'
         400:
           description: Bad Request
           content:
@@ -405,16 +408,24 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PhotoUploadReqDto'
+              type: object
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
       responses:
         200:
           description: Return information when upload was successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PhotoUploadResponseDto'
+                type: array
+                items:
+                  $ref: '#/components/schemas/PhotoUploadResponseDto'
         400:
           description: Bad Request when no valid request was send
           content:
@@ -689,6 +700,10 @@ components:
           format: int64
           description: ID of Photo
           example: 232343
+        heading:
+          type: integer
+          description: Heading of the Direction (North, South, West, East)
+          example: 90
         resourceGroupId:
           type: integer
           format: int64

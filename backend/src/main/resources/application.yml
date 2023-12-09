@@ -31,7 +31,10 @@ spring:
             authorization-grant-type: client_credentials
             client-id: backend-client
             client-secret: tlzRiERgcCepxEQiXyr2iPc5GpwCjoGw
-
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 backend:
   keycloak:
     serverUrl: "http://localhost"
@@ -50,3 +53,6 @@ backend:
 server:
   port: 8580
 
+file:
+  upload:
+    dir: /Volumes/DATA/tmp/ARStolpersteine/photos/uploads

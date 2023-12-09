@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0812231702-add-fields-to-photoTable
+      author: Marcel Wernisch
+      changes:
+        - addColumn:
+            tableName: photo
+            columns:
+              - column:
+                  name: file_url
+                  type: varchar(512)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: resource_group_id
+                  type: bigint
+                  constraints:
+                    nullable: false

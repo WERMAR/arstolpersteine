@@ -5,3 +5,6 @@ databaseChangeLog:
   - include:
       file: db.changelog-0512230315-add-overpass-db.yaml
       relativeToChangelogFile: true
+  - include:
+      file: db.changelog-0812231702-add-fields-to-photoTable.yaml
+      relativeToChangelogFile: true

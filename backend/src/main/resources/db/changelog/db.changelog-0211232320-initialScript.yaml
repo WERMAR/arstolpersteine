@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name: victim_id
                   type: bigint
+                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
@@ -42,6 +43,7 @@ databaseChangeLog:
               - column:
                   name: address_id
                   type: bigint
+                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
@@ -75,6 +77,7 @@ databaseChangeLog:
               - column:
                   name: stolperstein_id
                   type: bigint
+                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
@@ -132,6 +135,7 @@ databaseChangeLog:
               - column:
                   name: photo_id
                   type: bigint
+                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
@@ -161,4 +165,4 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: fk_photo_stolperstein
                     references: stolperstein(stolperstein_id)
-                    nullable: false
+                    nullable: true
