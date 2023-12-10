@@ -19,7 +19,8 @@ paths:
           description: Area around current User-Location
           required: true
           schema:
-            type: integer
+            type: number
+            format: double
             description: Number represent radius in meters
             example: 200
         - name: latUser
@@ -46,7 +47,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StolpersteinListResponseDto'
+                  $ref: '#/components/schemas/StolpersteinPositionDto'
         400:
           description: Bad Request - All Query-Params need to be set
           content:
@@ -239,4 +240,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PhotoResponseDto'
-
+    StolpersteinPositionDto:
+      description: Object which represents only a single point of a stolperstein without any further informations
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1023
+        position:
+          type: object
+          properties:
+            lat:
+              type: number
+              format: float
+              example: 90.233232
+            lng:
+              type: number
+              format: float
+              example: 23.232232

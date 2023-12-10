@@ -80,4 +80,13 @@ public class StolpersteinService implements StolpersteinPort {
     public int synchroniseOverpassAPI() {
         return overpassApiPort.synchronizeStolpersteine();
     }
+
+    @Override
+    public List<StolpersteinPositionDto> getStolpersteinForPositionAndRadius(Double radius, Float latUser, Float lngUser) {
+        List<Stolperstein> stolpersteinByPosition = this.stolpersteinRepository.findByCurrentLocationInRadius(lngUser, latUser, radius);
+        List<OverpassStolperstein> overpassStolpersteineByPosition = this.overpassStolpersteinRepository.findByCurrentLocationInRadius(lngUser, latUser, radius);
+        var overpassListStream = overpassStolpersteineByPosition.stream().map(this.stolpersteinDtoMapper::toPositionDto);
+        var stolpersteinListStream = stolpersteinByPosition.stream().map(this.stolpersteinDtoMapper::toPositionDto);
+        return Stream.concat(overpassListStream, stolpersteinListStream).toList();
+    }
 }
