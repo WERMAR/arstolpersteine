@@ -12,6 +12,6 @@ public interface StolpersteinPort {
     List<StolpersteinPositionDto> getAllStolpersteinPositions();
     StolpersteineResponseDto getStolpersteinForId(Long stolpersteinId);
     StolpersteineResponseDto updateStolperstein(Long stolpersteinId, StolpersteineReqDto request);
-
     int synchroniseOverpassAPI();
+    List<StolpersteinPositionDto> getStolpersteinForPositionAndRadius(Double radius, Float latUser, Float lngUser);
 }
