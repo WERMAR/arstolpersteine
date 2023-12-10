@@ -51,7 +51,9 @@ public class StolpersteinRestAdapater implements SecuredStolpersteineApi {
     }
 
     @Override
-    public ResponseEntity<StolpersteineResponseDto> updateStolpersteine(Integer stolpersteinId, StolpersteineReqDto stolpersteineReqDto) {
-        return null;
+    public ResponseEntity<StolpersteineResponseDto> updateStolpersteine(Long stolpersteinId, StolpersteineReqDto stolpersteineReqDto) {
+        log.info(stolpersteineReqDto.getDescription());
+        var response = this.stolpersteinPort.updateStolperstein(stolpersteinId, stolpersteineReqDto);
+        return ResponseEntity.ok(response);
     }
 }

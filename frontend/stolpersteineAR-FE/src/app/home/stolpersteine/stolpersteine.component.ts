@@ -3,6 +3,7 @@ import {SecuredStolpersteineService, StolpersteineResponseDto} from "../../gen/s
 import {PublicService} from "../../gen/public-api";
 import {MarkerMapsModel} from "../../shared/model/marker-maps.model";
 import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-stolpersteine',
@@ -12,12 +13,16 @@ import {Router} from "@angular/router";
 export class StolpersteineComponent implements OnInit {
 
   constructor(private readonly stolpersteinService: SecuredStolpersteineService,
-              private readonly router: Router) {
+              private readonly router: Router,
+              private readonly toastService: ToastrService) {
   }
 
   markers: MarkerMapsModel[] = []
   zoom = 12;
-  center!: google.maps.LatLngLiteral;
+  center: google.maps.LatLngLiteral = {
+    lat: 49.786774,
+    lng: 9.953637
+  }
   options: google.maps.MapOptions = {
     zoomControl: true,
     scrollwheel: true,
@@ -48,6 +53,9 @@ export class StolpersteineComponent implements OnInit {
           options: {animation: google.maps.Animation.BOUNCE}
         } as MarkerMapsModel
       }).forEach(e => this.markers.push(e))
+    }, error => {
+      console.error(error)
+      this.toastService.error('Ein Fehler ist aufgetreten, probieren Sie es erneut');
     })
   }
 
@@ -56,6 +64,9 @@ export class StolpersteineComponent implements OnInit {
     this.stolpersteinService.getStolpersteinForId(id).subscribe(response => {
       console.log(response);
       this.selectedStolperstein = response;
+    }, error => {
+      console.error(error)
+      this.toastService.error('Ein Fehler ist aufgetreten, probieren Sie es erneut');
     });
   }
 

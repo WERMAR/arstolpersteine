@@ -126,7 +126,7 @@
         </div>
       </form>
       <div class="row justify-content-end me-5">
-        <button mat-fab (click)="onUpload()" [disabled]="!stolpersteinForm.valid">
+        <button mat-fab (click)="onUpload()" [disabled]="!stolpersteinForm.valid || !fileHeadingValidity">
           <mat-icon fontIcon="file_upload" color="accent" style="color:white"></mat-icon>
         </button>
       </div>

@@ -6,8 +6,9 @@ import com.thws.arstolpersteine.gen.api.secured.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
@@ -80,6 +81,7 @@ public class StolpersteinDtoMapper {
     public StolpersteineResponseDto toStolpersteinDto(Stolperstein stolperstein) {
         return StolpersteineResponseDto.builder()
                 .id(stolperstein.getStolpersteinId())
+                .description(stolperstein.getDescription())
                 .position(StolpersteineResponseDtoPosition.builder()
                         .lng(stolperstein.getLongitude())
                         .lat(stolperstein.getLatitude())
@@ -92,10 +94,10 @@ public class StolpersteinDtoMapper {
                         .streetName(stolperstein.getAddress().getStreetName())
                         .build())
                 .victim(VictimResponseDto.builder()
-                        .dateOfBirth(LocalDate.ofInstant(stolperstein.getVictim().getDate_of_birth().toInstant(), ZoneId.systemDefault()))
-                        .dateOfDeath(LocalDate.ofInstant(stolperstein.getVictim().getDate_of_death().toInstant(), ZoneId.systemDefault()))
+                        .dateOfBirth(((Timestamp) stolperstein.getVictim().getDateOfBirth()).toLocalDateTime().toLocalDate())
+                        .dateOfDeath(((Timestamp) stolperstein.getVictim().getDateOfBirth()).toLocalDateTime().toLocalDate())
                         .firstname(stolperstein.getVictim().getName())
-                        .lastname(stolperstein.getVictim().getLast_name())
+                        .lastname(stolperstein.getVictim().getLastName())
                         .build())
                 .photos(List.of())
                 .build();

@@ -1,17 +1,22 @@
 package com.thws.ar.stolpersteine.backend.db.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Stolperstein")
 public class Stolperstein {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator="stolperstein_stolperstein_id_seq")
+    @SequenceGenerator(name="stolperstein_stolperstein_id_seq",sequenceName="stolperstein_stolperstein_id_seq", allocationSize=1)
     @Column(name = "stolperstein_id")
     private Long stolpersteinId;
 
@@ -21,7 +26,7 @@ public class Stolperstein {
     @Column(name = "lat")
     private float latitude;
 
-    @Column(name = "long")
+    @Column(name = "lng")
     private float longitude;
 
     @Column(name = "active")
@@ -33,15 +38,15 @@ public class Stolperstein {
     @Column(name = "created_user_name")
     private String createdUsername;
 
-    @OneToOne(targetEntity = Address.class)
+    @OneToOne(targetEntity = Address.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
     @JoinColumn(name = "victim_id")
-    @OneToOne(targetEntity = Victim.class)
+    @OneToOne(targetEntity = Victim.class, cascade = CascadeType.ALL)
     private Victim victim;
 
-    @OneToMany(mappedBy = "stolperstein")
+    @OneToMany(mappedBy = "stolperstein", cascade = CascadeType.ALL)
     private List<Photo> photos;
 
 }

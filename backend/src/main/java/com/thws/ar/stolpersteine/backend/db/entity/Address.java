@@ -1,27 +1,31 @@
 package com.thws.ar.stolpersteine.backend.db.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 
-
-@Data
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Address")
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "address_address_id_seq")
+    @SequenceGenerator(name="address_address_id_seq",sequenceName="address_address_id_seq", allocationSize=1)
     private Long address_id;
 
     @Column(name = "street_name")
     private String streetName;
 
     @Column(name = "house_number")
-    private Integer houseNumber;
+    private String houseNumber;
 
     @Column(name = "post_code")
-    private Integer postCode;
+    private String postCode;
 
     @Column(name = "city")
     private String city;

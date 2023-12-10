@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Marcel Wernisch
       changes:
         - createTable:
-            tableName: Victim
+            tableName: victim
             columns:
               - column:
                   name: victim_id
@@ -38,7 +38,7 @@ databaseChangeLog:
       author: Marcel Wernisch
       changes:
         - createTable:
-            tableName: Address
+            tableName: address
             columns:
               - column:
                   name: address_id
@@ -54,12 +54,12 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: house_number
-                  type: bigint
+                  type: varchar(5)
                   constraints:
                     nullable: false
               - column:
                   name: post_code
-                  type: bigint
+                  type: varchar(6)
                   constraints:
                     nullable: false
               - column:
@@ -72,7 +72,7 @@ databaseChangeLog:
       author: Marcel Wernisch
       changes:
         - createTable:
-            tableName: Stolperstein
+            tableName: stolperstein
             columns:
               - column:
                   name: stolperstein_id
@@ -106,10 +106,11 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     foreignKeyName: fk_stolpersteine_victim
-                    references: victim(victim_id)
+                    referencedColumnNames: victim_id
+                    referencedTableName: victim
                     nullable: false
               - column:
-                  name: long
+                  name: lng
                   type: FLOAT
                   constraints:
                     nullable: false
@@ -124,13 +125,14 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: fk_stolperstein_address
-                    references: address(address_id)
+                    referencedColumnNames: address_id
+                    referencedTableName: address
   - changeSet:
       id: 0211232320-initialScript-create_photo
       author: Marcel Wernisch
       changes:
         - createTable:
-            tableName: Photo
+            tableName: photo
             columns:
               - column:
                   name: photo_id
@@ -164,5 +166,6 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     foreignKeyName: fk_photo_stolperstein
-                    references: stolperstein(stolperstein_id)
+                    referencedColumnNames: stolperstein_id
+                    referencedTableName: stolperstein
                     nullable: true
