@@ -13,7 +13,8 @@ import lombok.*;
 public class Photo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator="photo_photo_id_seq")
+    @SequenceGenerator(name="photo_photo_id_seq",sequenceName="photo_photo_id_seq", allocationSize=1)
     private Long photoId;
 
     @Column(name = "heading")

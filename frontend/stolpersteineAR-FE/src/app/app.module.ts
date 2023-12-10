@@ -25,6 +25,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatChipsModule} from "@angular/material/chips";
+import {DatePipe} from "@angular/common";
+import {ToastrModule, ToastrService} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -44,6 +46,11 @@ import {MatChipsModule} from "@angular/material/chips";
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      progressBar: true,
+      progressAnimation: "increasing"
+    }),
     MatInputModule,
     MatToolbarModule,
     GoogleMapsModule,
@@ -59,7 +66,8 @@ import {MatChipsModule} from "@angular/material/chips";
       useFactory: initializeKeycloak,
       multi: true,
       deps: [KeycloakService]
-    }
+    },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

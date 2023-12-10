@@ -2,13 +2,15 @@ import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {
   PhotoReqDto,
-  PhotoUploadDto, SecuredPhotosService,
-  SecuredStolpersteineService,
+  PhotoUploadDto, PhotoUploadResponseDto, SecuredPhotosService,
+  SecuredStolpersteineService, StolpersteineReqDto,
   StolpersteineResponseDto
 } from "../../../gen/secured-api";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ThemePalette} from "@angular/material/core";
 import {MatChipListboxChange} from "@angular/material/chips";
+import {DatePipe} from "@angular/common";
+import {ToastrService} from "ngx-toastr";
 
 export interface PhotoFile {
   file: File;
@@ -24,16 +26,19 @@ export class StolpersteinManageViewComponent {
   stolpersteinId: number;
   stolperstein: StolpersteineResponseDto | undefined;
   stolpersteinForm: FormGroup;
+  fileHeadingValidity: boolean = true;
 
   photos: PhotoFile[] = [];
 
   constructor(private readonly router: Router,
               private readonly stolpersteinService: SecuredStolpersteineService,
-              private readonly photoUploadService: SecuredPhotosService) {
+              private readonly photoUploadService: SecuredPhotosService,
+              private readonly datePipe: DatePipe,
+              private readonly toastService: ToastrService) {
     const state = this.router.getCurrentNavigation()?.extras.state
     this.stolpersteinId = state ? state['stolpersteinId'] : -1;
     //if (this.stolpersteinId > -1) {
-    this.stolpersteinService.getStolpersteinForId(928981730).subscribe(response => {
+    this.stolpersteinService.getStolpersteinForId(this.stolpersteinId).subscribe(response => {
       this.stolperstein = response;
       console.log("Received Stolperstein: ", this.stolperstein);
       this.stolpersteinForm.patchValue({
@@ -102,14 +107,20 @@ export class StolpersteinManageViewComponent {
         heading: 0
       } as PhotoFile
       this.photos.push(photo);
-      console.log(photo);
+      this.fileHeadingValidity = false;
     }
   }
 
   onSelectElement($event: MatChipListboxChange, photo: File) {
-    const photoFile = this.photos.find(e => e.file.name === photo.name)
-    if (photoFile)
-      photoFile.heading = this.getHeadingOfChip($event.value)
+    if ($event.value) {
+      const photoFile = this.photos.find(e => e.file.name === photo.name)
+      if (photoFile) {
+        photoFile.heading = this.getHeadingOfChip($event.value)
+        this.fileHeadingValidity = true;
+      }
+    } else {
+      this.fileHeadingValidity = false;
+    }
   }
 
   private getHeadingOfChip(direction: string): number {
@@ -128,8 +139,53 @@ export class StolpersteinManageViewComponent {
 
   onUpload() {
     const photoUploadDto = this.photos.map(e => e.file);
-    this.photoUploadService.uploadPhotos(photoUploadDto).subscribe(response => {
-      console.log(response);
-    })
+    if (photoUploadDto.length > 0) {
+
+      this.photoUploadService.uploadPhotos(photoUploadDto).subscribe(response => {
+        const stolpersteinRequest = this.getStolpersteinRequestDto(response);
+        console.log(stolpersteinRequest);
+        this.stolpersteinService.updateStolpersteine(this.stolpersteinId, stolpersteinRequest).subscribe(response => {
+          console.log(response);
+        })
+      });
+    } else {
+      const stolpersteinRequest = this.getStolpersteinRequestDto(undefined);
+      console.log(stolpersteinRequest);
+      this.stolpersteinService.updateStolpersteine(this.stolpersteinId, stolpersteinRequest).subscribe(response => {
+          if (response) {
+            this.toastService.info(`Stolperstein aktualisiert mit ID: ${this.stolpersteinId}`);
+            this.router.navigateByUrl('/home/stolpersteine').then();
+          }
+        },
+        error => {
+          this.toastService.error('Ein Fehler ist aufgetreten, probieren Sie es erneut');
+        })
+    }
+  }
+
+  private getStolpersteinRequestDto(photoResponse: PhotoUploadResponseDto[] | undefined): StolpersteineReqDto {
+    return {
+      description: this.stolpersteinForm.controls['description'].value,
+      address: {
+        city: this.stolpersteinForm.controls['city'].value,
+        streetName: this.stolpersteinForm.controls['streetName'].value,
+        houseNumber: this.stolpersteinForm.controls['houseNumber'].value,
+        postCode: this.stolpersteinForm.controls['postcode'].value,
+      },
+      position: {
+        lat: this.stolperstein?.position?.lat!,
+        lng: this.stolperstein?.position?.lng!
+      },
+      victim: {
+        firstname: this.stolpersteinForm.controls['firstname'].value,
+        lastname: this.stolpersteinForm.controls['lastname'].value,
+        dateOfBirth: this.datePipe.transform(this.stolpersteinForm.controls['dateOfBirth'].value, 'yyyy-MM-dd')!,
+        dateOfDeath: this.datePipe.transform(this.stolpersteinForm.controls['dateOfDeath'].value, 'yyyy-MM-dd')!,
+      },
+      photos: photoResponse?.map(e => ({
+        id: e.id,
+        heading: this.photos.find(p => e.downloadURI!.includes(p.file.name))?.heading
+      } as PhotoReqDto))
+    }
   }
 }

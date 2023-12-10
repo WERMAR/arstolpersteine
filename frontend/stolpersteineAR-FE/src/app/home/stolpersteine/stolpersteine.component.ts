@@ -17,7 +17,10 @@ export class StolpersteineComponent implements OnInit {
 
   markers: MarkerMapsModel[] = []
   zoom = 12;
-  center!: google.maps.LatLngLiteral;
+  center: google.maps.LatLngLiteral = {
+    lat: 49.786774,
+    lng: 9.953637
+  }
   options: google.maps.MapOptions = {
     zoomControl: true,
     scrollwheel: true,

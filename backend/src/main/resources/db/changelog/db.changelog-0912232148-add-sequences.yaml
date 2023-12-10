@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0912232148-add-sequences
+      author: Marcel Wernisch
+      changes:
+        - createSequence:
+            incrementBy: 1  # Set your desired increment value
+            maxValue: 9999999  # Set your desired max value
+            ordered: true
+            schemaName: stolperstein
+            sequenceName: stolperstein_seq
+        - createSequence:
+            incrementBy: 1  # Set your desired increment value
+            maxValue: 9999999  # Set your desired max value
+            ordered: true
+            schemaName: address
+            sequenceName: address_seq
+        - createSequence:
+            incrementBy: 1  # Set your desired increment value
+            maxValue: 9999999  # Set your desired max value
+            ordered: true
+            schemaName: photo
+            sequenceName: photo_seq
+        - createSequence:
+            incrementBy: 1  # Set your desired increment value
+            maxValue: 9999999  # Set your desired max value
+            ordered: true
+            schemaName: victim
+            sequenceName: victi_seq

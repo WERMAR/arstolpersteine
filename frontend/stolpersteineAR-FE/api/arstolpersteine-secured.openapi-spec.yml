@@ -170,6 +170,7 @@ paths:
           required: true
           schema:
             type: integer
+            format: int64
       requestBody:
         required: true
         content:
@@ -512,6 +513,9 @@ components:
           type: integer
           format: int64
           example: 232
+        heading:
+          type: integer
+          example: 90 - for East
     StolpersteineReqDto:
       type: object
       required:
