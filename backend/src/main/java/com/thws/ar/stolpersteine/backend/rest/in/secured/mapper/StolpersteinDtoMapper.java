@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -93,8 +94,8 @@ public class StolpersteinDtoMapper {
                         .streetName(stolperstein.getAddress().getStreetName())
                         .build())
                 .victim(VictimResponseDto.builder()
-                        .dateOfBirth(((Date) stolperstein.getVictim().getDateOfBirth()).toLocalDate())
-                        .dateOfDeath(((Date) stolperstein.getVictim().getDateOfBirth()).toLocalDate())
+                        .dateOfBirth(((Timestamp) stolperstein.getVictim().getDateOfBirth()).toLocalDateTime().toLocalDate())
+                        .dateOfDeath(((Timestamp) stolperstein.getVictim().getDateOfBirth()).toLocalDateTime().toLocalDate())
                         .firstname(stolperstein.getVictim().getName())
                         .lastname(stolperstein.getVictim().getLastName())
                         .build())

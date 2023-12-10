@@ -37,23 +37,30 @@ export class StolpersteinManageViewComponent {
               private readonly toastService: ToastrService) {
     const state = this.router.getCurrentNavigation()?.extras.state
     this.stolpersteinId = state ? state['stolpersteinId'] : -1;
-    //if (this.stolpersteinId > -1) {
-    this.stolpersteinService.getStolpersteinForId(this.stolpersteinId).subscribe(response => {
-      this.stolperstein = response;
-      console.log("Received Stolperstein: ", this.stolperstein);
-      this.stolpersteinForm.patchValue({
-        firstname: this.stolperstein.victim?.firstname,
-        lastname: this.stolperstein.victim?.lastname,
-        dateOfBirth: this.stolperstein.victim?.dateOfBirth,
-        dateOfDeath: this.stolperstein.victim?.dateOfDeath,
-        streetName: this.stolperstein.address?.streetName,
-        city: this.stolperstein.address?.city,
-        postcode: this.stolperstein.address?.postCode,
-        houseNumber: this.stolperstein.address?.houseNumber,
-        description: this.stolperstein.description
-      });
-    });
-    // }
+    if (this.stolpersteinId > -1) {
+      this.stolpersteinService.getStolpersteinForId(this.stolpersteinId).subscribe(response => {
+          this.stolperstein = response;
+          console.log("Received Stolperstein: ", this.stolperstein);
+          this.stolpersteinForm.patchValue({
+            firstname: this.stolperstein.victim?.firstname,
+            lastname: this.stolperstein.victim?.lastname,
+            dateOfBirth: this.stolperstein.victim?.dateOfBirth,
+            dateOfDeath: this.stolperstein.victim?.dateOfDeath,
+            streetName: this.stolperstein.address?.streetName,
+            city: this.stolperstein.address?.city,
+            postcode: this.stolperstein.address?.postCode,
+            houseNumber: this.stolperstein.address?.houseNumber,
+            description: this.stolperstein.description
+          });
+        },
+        error => {
+          console.error(error)
+          this.toastService.error('Ein Fehler ist aufgetreten, probieren Sie es erneut');
+        });
+    } else {
+      this.toastService.warning('Keine Stolperstein-ID vorhanden');
+      this.router.navigateByUrl('/home/stolpersteine').then()
+    }
 
     this.stolpersteinForm = new FormGroup({
       firstname: new FormControl({value: this.stolperstein?.victim?.firstname, disabled: false}, {
@@ -145,8 +152,16 @@ export class StolpersteinManageViewComponent {
         const stolpersteinRequest = this.getStolpersteinRequestDto(response);
         console.log(stolpersteinRequest);
         this.stolpersteinService.updateStolpersteine(this.stolpersteinId, stolpersteinRequest).subscribe(response => {
-          console.log(response);
-        })
+            this.toastService.info(`Stolperstein aktualisiert mit ID: ${this.stolpersteinId}`);
+            this.router.navigateByUrl('/home/stolpersteine').then();
+          },
+          error => {
+            console.error(error)
+            this.toastService.error('Ein Fehler ist aufgetreten, probieren Sie es erneut');
+          })
+      }, error => {
+        console.error(error)
+        this.toastService.error('Ein Fehler ist aufgetreten, probieren Sie es erneut');
       });
     } else {
       const stolpersteinRequest = this.getStolpersteinRequestDto(undefined);
@@ -158,6 +173,7 @@ export class StolpersteinManageViewComponent {
           }
         },
         error => {
+          console.error(error)
           this.toastService.error('Ein Fehler ist aufgetreten, probieren Sie es erneut');
         })
     }
