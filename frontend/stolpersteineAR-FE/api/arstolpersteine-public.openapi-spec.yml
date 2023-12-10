@@ -4,7 +4,7 @@ info:
   description: This is the Public OpenAPI Specification for the AR-Stolpersteine Backend. Every Endpoint is without an Authentication accessible
   version: 1.0.0
 servers:
-  - url: 'http://localhost:4200'
+  - url: 'http://localhost:8580'
 paths:
   /api/public/stolpersteine:
     get:
@@ -19,7 +19,8 @@ paths:
           description: Area around current User-Location
           required: true
           schema:
-            type: integer
+            type: number
+            format: double
             description: Number represent radius in meters
             example: 200
         - name: latUser
@@ -46,7 +47,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StolpersteinListResponseDto'
+                  $ref: '#/components/schemas/StolpersteinPositionDto'
         400:
           description: Bad Request - All Query-Params need to be set
           content:
@@ -79,6 +80,7 @@ paths:
           required: true
           schema:
             type: integer
+            format: int64
       responses:
         200:
           description: return a stolpersteine based for stolpersteinID
@@ -149,10 +151,6 @@ components:
     VictimResponseDto:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 232
         firstname:
           type: string
           example: Max
@@ -170,10 +168,6 @@ components:
     AddressResponseDto:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 232
         streetName:
           type: string
           example: "Mustermannstrasse"
@@ -193,10 +187,6 @@ components:
     PhotoResponseDto:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 232
         heading:
           type: integer
           description: representing the heading on a compass for N, W, E, S
@@ -239,4 +229,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PhotoResponseDto'
-
+    StolpersteinPositionDto:
+      description: Object which represents only a single point of a stolperstein without any further informations
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1023
+        position:
+          type: object
+          properties:
+            lat:
+              type: number
+              format: float
+              example: 90.233232
+            lng:
+              type: number
+              format: float
+              example: 23.232232

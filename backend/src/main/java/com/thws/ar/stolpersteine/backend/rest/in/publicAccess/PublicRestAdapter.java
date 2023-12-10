@@ -22,9 +22,10 @@ public class PublicRestAdapter implements PublicApi {
     private final PublicMapperObject publicMapperObject;
 
     @Override
-    public ResponseEntity<StolpersteineResponseDto> getStolpersteinForID(Integer stolpersteinId) {
+    public ResponseEntity<StolpersteineResponseDto> getStolpersteinForID(Long stolpersteinId) {
         log.info("Called " + stolpersteinId);
-        return null;
+        var result = this.stolpersteinPort.getStolpersteinForId(stolpersteinId);
+        return ResponseEntity.ok(publicMapperObject.toPublic(result));
     }
 
     @Override

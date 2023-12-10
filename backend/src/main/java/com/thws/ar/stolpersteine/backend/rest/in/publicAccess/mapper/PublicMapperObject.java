@@ -3,6 +3,8 @@ package com.thws.ar.stolpersteine.backend.rest.in.publicAccess.mapper;
 import com.thws.arstolpersteine.gen.api.publicApi.model.*;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PublicMapperObject {
 
@@ -37,7 +39,7 @@ public class PublicMapperObject {
                         .dateOfBirth(securedDto.getVictim().getDateOfBirth())
                         .dateOfDeath(securedDto.getVictim().getDateOfDeath())
                         .build())
-                .photos(securedDto.getPhotos().stream().map(e -> PhotoResponseDto.builder().id(e.getId()).heading(e.getHeading()).resourceGroup(e.getResourceGroup()).resourceUrl(e.getResourceUrl()).build()).toList())
+                .photos(securedDto.getPhotos() != null && !securedDto.getPhotos().isEmpty() ? securedDto.getPhotos().stream().map(e -> PhotoResponseDto.builder().heading(e.getHeading()).resourceGroup(e.getResourceGroup()).resourceUrl(e.getResourceUrl()).build()).toList(): List.of())
                 .build();
     }
 }
