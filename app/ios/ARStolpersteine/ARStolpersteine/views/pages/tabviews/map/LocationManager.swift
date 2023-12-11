@@ -10,6 +10,8 @@ import MapKit
 final class LocationManager: NSObject, ObservableObject {
     private let locationManager = CLLocationManager()
     
+    private var mapDelegate: MapDelegate?
+    
     @Published var region = MKCoordinateRegion(
         center: .init(latitude: 50.036666, longitude: 10.515015),
         span: .init(latitudeDelta: 0.2, longitudeDelta: 0.2)
@@ -17,10 +19,15 @@ final class LocationManager: NSObject, ObservableObject {
     
     override init() {
         super.init()
-        
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.setup()
+    }
+    
+    func startUpdatingPosition(_ delegate: MapDelegate) {
+        print("LOCATIONMANAGER START UPDATING PERFORM")
+        self.mapDelegate = delegate
+        self.locationManager.startUpdatingLocation()
     }
     
     /**
@@ -52,12 +59,18 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        locationManager.stopUpdatingLocation()
         locations.last.map {
             region = MKCoordinateRegion(
                 center: $0.coordinate,
                 span: .init(latitudeDelta: 0.01, longitudeDelta: 0.01)
             )
         }
+        self.mapDelegate?.regionDidChanged(region)
+        NSLog("Region: \(region.center)")
+    }
+    
+    func stopUpdatingPosition() {
+        print("LOCATIONMANAGER STOP UPDATING PERFORM")
+        self.locationManager.stopUpdatingLocation()
     }
 }
