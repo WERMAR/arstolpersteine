@@ -15,6 +15,7 @@ struct MapView: View, MapDelegate {
     @StateObject var manager = LocationManager()
     @State private var updatedRegion: MKCoordinateRegion? = nil
     @State private var annotationItems = [StolpersteinPin]()
+    private let client: Client
     
     
     var body: some View {
@@ -32,7 +33,6 @@ struct MapView: View, MapDelegate {
         }
     }
     
-    let client: Client
     
     init() {
         self.client = Client(serverURL: try! Servers.server1(), transport: URLSessionTransport())
