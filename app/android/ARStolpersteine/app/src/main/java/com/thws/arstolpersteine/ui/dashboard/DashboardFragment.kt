@@ -39,6 +39,7 @@ class DashboardFragment : Fragment(),
     private var _binding: FragmentDashboardBinding? = null
     private var mapView: MapView? = null
     private var googleMap: GoogleMap? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -66,7 +67,6 @@ class DashboardFragment : Fragment(),
     }
 
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -84,4 +84,4 @@ class DashboardFragment : Fragment(),
                 .title("THWS campus"))
         googleMap?.moveCamera(CameraUpdateFactory.newLatLng(thws))
     }
-}
+}    
