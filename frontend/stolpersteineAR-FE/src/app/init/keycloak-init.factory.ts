@@ -6,14 +6,14 @@ export function initializeKeycloak(
   return () =>
     keycloak.init({
       config: {
-        url: 'http://localhost',
+        url: 'http://localhost:8080',
         realm: 'arStolpersteine',
         clientId: 'frontend-client'
       },
       initOptions: {
         pkceMethod: 'S256',
         // must match to the configured value in keycloak
-        redirectUri: 'http://localhost:4200/home',
+        redirectUri: 'http://localhost:443/home',
         checkLoginIframe: false
       }
     });

@@ -17,6 +17,7 @@
 		F6474EB22B07688E00890712 /* ARStolpersteineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6474EB12B07688E00890712 /* ARStolpersteineTests.swift */; };
 		F6474EBC2B07688E00890712 /* ARStolpersteineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6474EBB2B07688E00890712 /* ARStolpersteineUITests.swift */; };
 		F6474EBE2B07688E00890712 /* ARStolpersteineUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6474EBD2B07688E00890712 /* ARStolpersteineUITestsLaunchTests.swift */; };
+		F65BB7692B5DDFA50041DDD1 /* ARHoverComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65BB7682B5DDFA50041DDD1 /* ARHoverComponent.swift */; };
 		F6E195882B07A64F0034A233 /* MapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E195862B07A64E0034A233 /* MapDelegate.swift */; };
 		F6E195892B07A64F0034A233 /* PageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E195872B07A64F0034A233 /* PageEnum.swift */; };
 		F6E195912B07A6620034A233 /* CameraARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E1958A2B07A6620034A233 /* CameraARView.swift */; };
@@ -56,6 +57,7 @@
 		F6474EB72B07688E00890712 /* ARStolpersteineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARStolpersteineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6474EBB2B07688E00890712 /* ARStolpersteineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARStolpersteineUITests.swift; sourceTree = "<group>"; };
 		F6474EBD2B07688E00890712 /* ARStolpersteineUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARStolpersteineUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F65BB7682B5DDFA50041DDD1 /* ARHoverComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARHoverComponent.swift; sourceTree = "<group>"; };
 		F6E195612B0777C00034A233 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F6E195862B07A64E0034A233 /* MapDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDelegate.swift; sourceTree = "<group>"; };
 		F6E195872B07A64F0034A233 /* PageEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageEnum.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				F62C6FE62B269B2A00101D18 /* openapi-generator-config.yml */,
 				F6E195612B0777C00034A233 /* Info.plist */,
 				F6E1955E2B0772FD0034A233 /* views */,
+				F65BB7632B5DD6760041DDD1 /* Delegates */,
 				F6E195852B07A62D0034A233 /* Helper */,
 				F6474EA02B07688C00890712 /* AppDelegate.swift */,
 				F6474EA42B07688E00890712 /* Assets.xcassets */,
@@ -154,10 +157,19 @@
 			path = ARStolpersteineUITests;
 			sourceTree = "<group>";
 		};
+		F65BB7632B5DD6760041DDD1 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				F6E195862B07A64E0034A233 /* MapDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		F6E1955E2B0772FD0034A233 /* views */ = {
 			isa = PBXGroup;
 			children = (
 				F6E1959A2B07A8100034A233 /* pages */,
+				F65BB7682B5DDFA50041DDD1 /* ARHoverComponent.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -165,7 +177,6 @@
 		F6E195852B07A62D0034A233 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				F6E195862B07A64E0034A233 /* MapDelegate.swift */,
 				F6E195872B07A64F0034A233 /* PageEnum.swift */,
 				F6E1959F2B0846FA0034A233 /* ColorExtension.swift */,
 			);
@@ -349,6 +360,7 @@
 				F6E195962B07A6620034A233 /* HomeView.swift in Sources */,
 				F6474EA12B07688C00890712 /* AppDelegate.swift in Sources */,
 				F6E195912B07A6620034A233 /* CameraARView.swift in Sources */,
+				F65BB7692B5DDFA50041DDD1 /* ARHoverComponent.swift in Sources */,
 				F6E195892B07A64F0034A233 /* PageEnum.swift in Sources */,
 				F6E1959E2B083E260034A233 /* LocationManager.swift in Sources */,
 			);

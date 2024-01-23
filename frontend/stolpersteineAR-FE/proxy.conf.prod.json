@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "http://arproject-be:8580",
+    "secure": false
+  }
+}

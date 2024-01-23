@@ -106,6 +106,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDto'
+  /api/public/photo/download/{resourceGroupId}/{resourceId}:
+    get:
+      tags:
+        - Public
+      summary: Download Photo for given ResourceURL
+      description: Download Photo for given ResourceURL
+      operationId: downloadPhoto
+      parameters:
+        - name: resourceGroupId
+          in: path
+          description: ID of Resource Group
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: resourceId
+          in: path
+          description: ID of Photo
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Return information when upload was successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoDownloadDto'
+        404:
+          description: Resource was not found with given Resource-URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        400:
+          description: Bad Request when no valid request was send
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
 components:
   schemas:
     ProblemDto:
@@ -248,3 +295,10 @@ components:
               type: number
               format: float
               example: 23.232232
+    PhotoDownloadDto:
+      description: Download Dto for Photo
+      type: object
+      properties:
+        photo:
+          type: string
+          format: binary

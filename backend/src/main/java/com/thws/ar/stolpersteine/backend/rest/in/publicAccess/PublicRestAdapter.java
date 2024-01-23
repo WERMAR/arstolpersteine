@@ -1,8 +1,10 @@
 package com.thws.ar.stolpersteine.backend.rest.in.publicAccess;
 
 import com.thws.ar.stolpersteine.backend.rest.in.publicAccess.mapper.PublicMapperObject;
+import com.thws.ar.stolpersteine.backend.service.port.PhotoPort;
 import com.thws.ar.stolpersteine.backend.service.port.StolpersteinPort;
 import com.thws.arstolpersteine.gen.api.publicApi.PublicApi;
+import com.thws.arstolpersteine.gen.api.publicApi.model.PhotoDownloadDto;
 import com.thws.arstolpersteine.gen.api.publicApi.model.StolpersteinListResponseDto;
 import com.thws.arstolpersteine.gen.api.publicApi.model.StolpersteinPositionDto;
 import com.thws.arstolpersteine.gen.api.publicApi.model.StolpersteineResponseDto;
@@ -20,6 +22,12 @@ public class PublicRestAdapter implements PublicApi {
 
     private final StolpersteinPort stolpersteinPort;
     private final PublicMapperObject publicMapperObject;
+    private final PhotoPort photoService;
+
+    @Override
+    public ResponseEntity<PhotoDownloadDto> downloadPhoto(Long resourceGroupId, Long resourceId) {
+        return ResponseEntity.ok(photoService.downloadPub(resourceGroupId + "/" + resourceId));
+    }
 
     @Override
     public ResponseEntity<StolpersteineResponseDto> getStolpersteinForID(Long stolpersteinId) {
