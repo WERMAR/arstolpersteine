@@ -5,7 +5,8 @@ import com.thws.ar.stolpersteine.backend.db.entity.Photo;
 import com.thws.ar.stolpersteine.backend.db.repositories.PhotoRepository;
 import com.thws.ar.stolpersteine.backend.rest.in.secured.mapper.PhotoDtoMapper;
 import com.thws.ar.stolpersteine.backend.service.port.PhotoPort;
-import com.thws.arstolpersteine.gen.api.secured.model.PhotoUploadResponseDto;
+import com.thws.arstolpersteine.gen.api.publicApi.model.PhotoDownloadDto;
+import com.thws.arstolpersteine.gen.api.secured.model.PhotoResponseDto;
 import com.thws.arstolpersteine.gen.api.secured.model.ResourcePhotoDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,9 @@ public class PhotoService implements PhotoPort {
     private final PhotoDtoMapper photoDtoMapper;
 
     @Override
-    public List<PhotoUploadResponseDto> uploadPhotos(List<MultipartFile> files) {
+    public List<PhotoResponseDto> uploadPhotos(List<MultipartFile> files) {
         String resoureGroupId = String.valueOf(new Random().nextLong(0, Long.MAX_VALUE));
-        var photos = new ArrayList<PhotoUploadResponseDto>();
+        var photos = new ArrayList<PhotoResponseDto>();
         for (var file : files) {
             var uploadPath = this.fileStorageService.storeFile(file, resoureGroupId);
             var photo = Photo.builder()
@@ -44,13 +45,20 @@ public class PhotoService implements PhotoPort {
     }
 
     @Override
-    public List<ResourcePhotoDto> getPhotosForGroupId(Long groupId) {
+    public ResourcePhotoDto getPhotosForGroupId(Long groupId) {
         List<Photo> photos = photoRepository.findByResourceGroupId(groupId);
-        List<ResourcePhotoDto> response = new ArrayList<>();
-        for (var photo : photos) {
-            var resource = this.fileStorageService.loadFileAsResource(photo.getFileUrl());
-            response.add(photoDtoMapper.toResourcePhotoDto(photo, resource));
-        }
-        return response;
+        return photoDtoMapper.toResourcePhotoDto(photos);
+    }
+
+    @Override
+    public PhotoDownloadDto downloadPub(String fileUri) {
+        var resource = fileStorageService.loadFileAsResource(fileUri);
+        return PhotoDownloadDto.builder().photo(resource).build();
+    }
+
+    @Override
+    public com.thws.arstolpersteine.gen.api.secured.model.PhotoDownloadDto downloadPrivate(String fileUri) {
+        var resource = fileStorageService.loadFileAsResource(fileUri);
+        return com.thws.arstolpersteine.gen.api.secured.model.PhotoDownloadDto.builder().photo(resource).build();
     }
 }

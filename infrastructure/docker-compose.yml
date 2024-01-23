@@ -18,8 +18,8 @@ services:
     volumes:
       - ./imports:/opt/bitnami/keycloak/data/import
     ports:
-      - "80:8080"
-      - "443:8443"
+      - "8080:8080"
+      - "8443:8443"
     environment:
       - KEYCLOAK_DATABASE_HOST=postgres
       - KEYCLOAK_ADMIN_USER=admin
@@ -28,6 +28,21 @@ services:
       - KEYCLOAK_DATABASE_NAME=keycloak
       - KEYCLOAK_DATABASE_PASSWORD=keycloakPW
       - KEYCLOAK_EXTRA_ARGS=--import-realm
+    depends_on:
+      - postgres
+
+  arproject-fe:
+    image: wermar/arproject-fe:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - arproject-be
+
+  arproject-be:
+    container_name: arproject-be
+    image: wermar/arproject-be:latest
+    ports:
+      - "8580:8580"
     depends_on:
       - postgres
 

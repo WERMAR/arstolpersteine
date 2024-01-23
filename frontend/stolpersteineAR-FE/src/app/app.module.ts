@@ -27,6 +27,15 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatChipsModule} from "@angular/material/chips";
 import {DatePipe} from "@angular/common";
 import {ToastrModule, ToastrService} from "ngx-toastr";
+import {Configuration, ConfigurationParameters, SecuredApiApiModule} from "./gen/secured-api";
+import {environment} from "../../environment/environment";
+
+export function apiConfigFactory(): Configuration {
+  const params: ConfigurationParameters = {
+    basePath: environment.API_BASE_URL,
+  };
+  return new Configuration(params);
+}
 
 @NgModule({
   declarations: [
@@ -37,6 +46,7 @@ import {ToastrModule, ToastrService} from "ngx-toastr";
     StolpersteinManageViewComponent
   ],
   imports: [
+    SecuredApiApiModule.forRoot(apiConfigFactory),
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,

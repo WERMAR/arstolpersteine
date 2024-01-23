@@ -347,7 +347,7 @@ paths:
     get:
       tags:
         - SecuredPhotos
-      summary: Load Photos for within resource group
+      summary: Load Photo-Information for all within resource group
       description: Load All existing Photos as a Resource Group for the Group-ID
       operationId: getPhotosForGroupId
       security:
@@ -368,9 +368,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ResourcePhotoDto'
+                $ref: '#/components/schemas/ResourcePhotoDto'
         400:
           description: Bad Request
           content:
@@ -426,7 +424,58 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PhotoUploadResponseDto'
+                  $ref: '#/components/schemas/PhotoResponseDto'
+        400:
+          description: Bad Request when no valid request was send
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+        500:
+          description: Internal Server Errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
+  /api/secured/photos/download/{resourceGroupId}/{resourceId}:
+    get:
+      tags:
+        - SecuredPhotos
+      summary: Download Photo for given ResourceURL
+      description: Download Photo for given ResourceURL
+      operationId: downloadPhoto
+      parameters:
+        - name: resourceGroupId
+          in: path
+          description: ID of Resource Group
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: resourceId
+          in: path
+          description: ID of Photo
+          required: true
+          schema:
+            type: integer
+            format: int64
+      security:
+        - KeycloakAuth:
+            - USER
+            - ADMIN
+      responses:
+        200:
+          description: Return information when upload was successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoDownloadDto'
+        404:
+          description: Resource was not found with given Resource-URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDto'
         400:
           description: Bad Request when no valid request was send
           content:
@@ -667,21 +716,20 @@ components:
         requestedStolperstein:
           $ref: '#/components/schemas/StolpersteineResponseDto'
     ResourcePhotoDto:
-      description: The Entity of one Photo
+      description: The Entity of all Photos within a Resource Group
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 2322
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhotoResponseDto'
+    PhotoDownloadDto:
+      description: Download Dto for Photo
+      type: object
+      properties:
         photo:
           type: string
           format: binary
-    ResourceGroupPhotoDto:
-      description: List of the Resource-Photo loaded
-      type: array
-      items:
-        $ref: '#/components/schemas/ResourcePhotoDto'
     PhotoUploadDto:
       description: Photo Upload Request Object
       type: object
@@ -695,28 +743,6 @@ components:
       minimum: 1
       items:
         $ref: '#/components/schemas/PhotoUploadDto'
-    PhotoUploadResponseDto:
-      description: Response after an successful Upload
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: ID of Photo
-          example: 232343
-        heading:
-          type: integer
-          description: Heading of the Direction (North, South, West, East)
-          example: 90
-        resourceGroupId:
-          type: integer
-          format: int64
-          description: ID of Resource Group, how the complete Upload is downloadable
-          example: 232
-        downloadURI:
-          type: string
-          description: downloadURI for download the complete ResourceGroup
-          example: /api/secured/photos/resourceGroup/232
     StolpersteinPositionDto:
       description: Object which represents only a single point of a stolperstein without any further informations
       type: object

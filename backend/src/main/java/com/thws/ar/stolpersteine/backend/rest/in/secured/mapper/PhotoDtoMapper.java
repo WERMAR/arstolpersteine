@@ -1,27 +1,32 @@
 package com.thws.ar.stolpersteine.backend.rest.in.secured.mapper;
 
 import com.thws.ar.stolpersteine.backend.db.entity.Photo;
-import com.thws.arstolpersteine.gen.api.secured.model.PhotoUploadResponseDto;
+import com.thws.arstolpersteine.gen.api.secured.model.PhotoResponseDto;
 import com.thws.arstolpersteine.gen.api.secured.model.ResourcePhotoDto;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class PhotoDtoMapper {
 
-    public PhotoUploadResponseDto toPhotoUploadResponseDto(Photo photo) {
-        return PhotoUploadResponseDto.builder()
+    public PhotoResponseDto toPhotoUploadResponseDto(Photo photo) {
+        return PhotoResponseDto.builder()
                 .id(photo.getPhotoId())
-                .resourceGroupId(photo.getResourceGroupId())
+                .resourceGroup("/" + photo.getResourceGroupId())
                 .heading(photo.getHeading())
-                .downloadURI("/" + photo.getFileUrl())
+                .resourceUrl("/" + photo.getFileUrl())
                 .build();
     }
 
-    public ResourcePhotoDto toResourcePhotoDto(Photo photo, Resource resource) {
+    public ResourcePhotoDto toResourcePhotoDto(List<Photo> photo) {
         return ResourcePhotoDto.builder()
-                .id(photo.getPhotoId())
-                .photo(resource)
+                .photos(photo.stream().map(e -> PhotoResponseDto.builder()
+                        .id(e.getPhotoId())
+                        .heading(e.getHeading())
+                        .resourceGroup("/" + e.getResourceGroupId())
+                        .resourceUrl("/" + e.getFileUrl())
+                        .build()).toList())
                 .build();
     }
 

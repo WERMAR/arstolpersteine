@@ -23,7 +23,7 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: ${backend.keycloak.base}/certs
-          issuer-uri: ${backend.keycloak.serverUrl}/realms/${backend.keycloak.realm}
+          issuer-uri: http://localhost:8080/realms/${backend.keycloak.realm}
       client:
         provider:
           keycloak:
@@ -40,7 +40,7 @@ spring:
       max-request-size: 10MB
 backend:
   keycloak:
-    serverUrl: "http://localhost"
+    serverUrl: "http://keycloak:8080"
     realm: arStolpersteine
     base: ${backend.keycloak.serverUrl}/realms/${backend.keycloak.realm}/protocol/openid-connect
   rest:
