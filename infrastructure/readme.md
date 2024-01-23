@@ -39,3 +39,7 @@ docker-compose down
 This Command deletes the volumes of the postgresql database instance. __Please do this only when the Stack is not running__.
 It's useful when a new configuration of the __realm.json__ is available and has to be imported by the Keycloak. Its remove all existing Data inside the Database. So the Database will be empty before the next Keycloak-Startup. 
 
+
+### Connect psql inside docker postgres on THWS Server
+1. ```docker exec -it <docker container name> bash```
+2. ```psql -h localhost -p 5432 -U keycloak```

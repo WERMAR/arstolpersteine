@@ -13,7 +13,7 @@ export function initializeKeycloak(
       initOptions: {
         pkceMethod: 'S256',
         // must match to the configured value in keycloak
-        redirectUri: 'http://localhost:443/home',
+        redirectUri: 'http://localhost/home',
         checkLoginIframe: false
       }
     });

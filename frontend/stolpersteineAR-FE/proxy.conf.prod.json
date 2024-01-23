@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://arproject-be:8580",
+    "target": "http://arproject-be:443",
     "secure": false
   }
 }
