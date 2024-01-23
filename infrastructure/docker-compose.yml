@@ -42,7 +42,7 @@ services:
     container_name: arproject-be
     image: wermar/arproject-be:latest
     ports:
-      - "8580:8580"
+      - "443:8580"
     depends_on:
       - postgres
 
