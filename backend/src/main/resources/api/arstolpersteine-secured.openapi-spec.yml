@@ -723,13 +723,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PhotoResponseDto'
-    PhotoDownloadDto:
-      description: Download Dto for Photo
-      type: object
-      properties:
-        photo:
-          type: string
-          format: binary
     PhotoUploadDto:
       description: Photo Upload Request Object
       type: object

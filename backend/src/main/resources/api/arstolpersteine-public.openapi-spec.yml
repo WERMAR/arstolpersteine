@@ -295,10 +295,3 @@ components:
               type: number
               format: float
               example: 23.232232
-    PhotoDownloadDto:
-      description: Download Dto for Photo
-      type: object
-      properties:
-        photo:
-          type: string
-          format: binary

@@ -2,7 +2,6 @@ package com.thws.ar.stolpersteine.backend.rest.in.secured;
 
 import com.thws.ar.stolpersteine.backend.service.port.PhotoPort;
 import com.thws.arstolpersteine.gen.api.secured.SecuredPhotosApi;
-import com.thws.arstolpersteine.gen.api.secured.model.PhotoDownloadDto;
 import com.thws.arstolpersteine.gen.api.secured.model.PhotoResponseDto;
 import com.thws.arstolpersteine.gen.api.secured.model.ResourcePhotoDto;
 import lombok.RequiredArgsConstructor;

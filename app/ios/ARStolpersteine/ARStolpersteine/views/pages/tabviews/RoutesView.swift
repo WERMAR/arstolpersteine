@@ -11,7 +11,7 @@ struct RoutesView: View {
     var body: some View {
         ZStack {
             Color.backgroundColor.ignoresSafeArea()
-            Text("This were Routes")
+            RemoteImage(placeholderImage: Image(systemName: "photo"), fileUrl: String("4383773892721109878/image2.jpeg"))
         }
     }
 }

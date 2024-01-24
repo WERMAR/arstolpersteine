@@ -5,7 +5,6 @@ import com.thws.ar.stolpersteine.backend.db.entity.Photo;
 import com.thws.ar.stolpersteine.backend.db.repositories.PhotoRepository;
 import com.thws.ar.stolpersteine.backend.rest.in.secured.mapper.PhotoDtoMapper;
 import com.thws.ar.stolpersteine.backend.service.port.PhotoPort;
-import com.thws.arstolpersteine.gen.api.publicApi.model.PhotoDownloadDto;
 import com.thws.arstolpersteine.gen.api.secured.model.PhotoReqDto;
 import com.thws.arstolpersteine.gen.api.secured.model.PhotoResponseDto;
 import com.thws.arstolpersteine.gen.api.secured.model.ResourcePhotoDto;
