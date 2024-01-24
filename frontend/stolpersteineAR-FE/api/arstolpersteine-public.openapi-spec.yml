@@ -4,7 +4,7 @@ info:
   description: This is the Public OpenAPI Specification for the AR-Stolpersteine Backend. Every Endpoint is without an Authentication accessible
   version: 1.0.0
 servers:
-  - url: 'http://localhost:8580'
+  - url: 'http://localhost:443'
 paths:
   /api/public/stolpersteine:
     get:
@@ -126,15 +126,15 @@ paths:
           description: ID of Photo
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         200:
           description: Return information when upload was successfully
           content:
-            application/json:
+            application/octet-stream:
               schema:
-                $ref: '#/components/schemas/PhotoDownloadDto'
+                type: string
+                format: binary
         404:
           description: Resource was not found with given Resource-URL
           content:

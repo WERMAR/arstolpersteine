@@ -4,7 +4,7 @@ info:
   description: This is the secured OpenAPI Specification for the AR-Stolpersteine Backend
   version: 1.0.0
 servers:
-  - url: 'http://localhost:8580'
+  - url: 'http://localhost:443'
 paths:
   /api/secured/stolpersteine/synchronize:
     get:
