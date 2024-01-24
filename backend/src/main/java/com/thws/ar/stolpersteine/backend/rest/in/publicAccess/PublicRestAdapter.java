@@ -10,6 +10,7 @@ import com.thws.arstolpersteine.gen.api.publicApi.model.StolpersteinPositionDto;
 import com.thws.arstolpersteine.gen.api.publicApi.model.StolpersteineResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +26,8 @@ public class PublicRestAdapter implements PublicApi {
     private final PhotoPort photoService;
 
     @Override
-    public ResponseEntity<PhotoDownloadDto> downloadPhoto(Long resourceGroupId, Long resourceId) {
-        return ResponseEntity.ok(photoService.downloadPub(resourceGroupId + "/" + resourceId));
+    public ResponseEntity<Resource> downloadPhoto(Long resourceGroupId, String resourceId) {
+        return ResponseEntity.ok(photoService.download(resourceGroupId + "/" + resourceId));
     }
 
     @Override

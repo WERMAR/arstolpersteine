@@ -6,6 +6,7 @@ import com.thws.arstolpersteine.gen.api.secured.model.PhotoDownloadDto;
 import com.thws.arstolpersteine.gen.api.secured.model.PhotoResponseDto;
 import com.thws.arstolpersteine.gen.api.secured.model.ResourcePhotoDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,8 +20,8 @@ public class PhotoRestAdapter implements SecuredPhotosApi {
     private final PhotoPort photoService;
 
     @Override
-    public ResponseEntity<PhotoDownloadDto> downloadPhoto(Long resourceGroupId, Long resourceId) {
-        return ResponseEntity.ok(photoService.downloadPrivate(resourceGroupId + "/" + resourceId));
+    public ResponseEntity<Resource> downloadPhoto(Long resourceGroupId, String resourceId) {
+        return ResponseEntity.ok(photoService.download(resourceGroupId + "/" + resourceId));
     }
 
     @Override
