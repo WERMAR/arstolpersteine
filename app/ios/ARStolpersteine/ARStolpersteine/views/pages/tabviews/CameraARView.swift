@@ -21,12 +21,6 @@ struct CameraARView: View, MapDelegate {
     var body: some View {
         ZStack {
             ARViewContainer().edgesIgnoringSafeArea(.top)
-            Text(String("\(self.compassHeading.degrees)"))
-                .fixedSize(horizontal: false, vertical: true)
-                .multilineTextAlignment(.center)
-                .padding()
-                .frame(width: 300, height: 200)
-                .background(Rectangle().fill(Color.white).shadow(radius: 3))
             CompassRangeEnum.image(for: self.compassHeading.degrees, northFileURL: getImageForKeyURL(DirectionKeys.NORTH), southFileURL: getImageForKeyURL(DirectionKeys.SOUTH), eastFileURL: getImageForKeyURL(DirectionKeys.EAST), westFileURL: getImageForKeyURL(DirectionKeys.WEST))
         }.onAppear {
             manager.startUpdatingPosition(self)
@@ -159,10 +153,10 @@ struct CameraARView: View, MapDelegate {
         for arPoint in arPoints {
             let arPointLocation = getCLLocationOfPoint(arPoint.pin)
             let distance = arPointLocation.distance(from: myLocation)
-            if (previousDistance == -1.0) {
+            if (distance <= 5 && previousDistance == -1.0) {
                 previousDistance = distance
                 nearestStolperstein = arPoint
-            } else if (distance < previousDistance) {
+            } else if (distance <= 5 && distance < previousDistance) {
                 previousDistance = distance
                 nearestStolperstein = arPoint;
             }
