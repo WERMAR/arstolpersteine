@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F606AA3B2B60AB1B00231B16 /* CompassHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = F606AA3A2B60AB1B00231B16 /* CompassHeading.swift */; };
+		F606AA402B60AD1400231B16 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F606AA3F2B60AD1400231B16 /* RemoteImage.swift */; };
+		F606AA432B60AD5E00231B16 /* RemoteImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F606AA422B60AD5E00231B16 /* RemoteImageCache.swift */; };
+		F606AA452B6134A900231B16 /* CompassRangeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F606AA442B6134A900231B16 /* CompassRangeEnum.swift */; };
+		F606AA482B616C8800231B16 /* DirectionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F606AA472B616C8800231B16 /* DirectionKeys.swift */; };
+		F606AA4B2B6188FF00231B16 /* StolpersteinRouteListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F606AA4A2B6188FF00231B16 /* StolpersteinRouteListItem.swift */; };
 		F62C6FDD2B26993F00101D18 /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = F62C6FDC2B26993F00101D18 /* OpenAPIRuntime */; };
 		F62C6FE02B26996C00101D18 /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = F62C6FDF2B26996C00101D18 /* OpenAPIURLSession */; };
 		F62C6FE72B269B2A00101D18 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = F62C6FE52B269B2A00101D18 /* openapi.yaml */; };
@@ -46,6 +52,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F606AA3A2B60AB1B00231B16 /* CompassHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassHeading.swift; sourceTree = "<group>"; };
+		F606AA3F2B60AD1400231B16 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
+		F606AA422B60AD5E00231B16 /* RemoteImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageCache.swift; sourceTree = "<group>"; };
+		F606AA442B6134A900231B16 /* CompassRangeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassRangeEnum.swift; sourceTree = "<group>"; };
+		F606AA472B616C8800231B16 /* DirectionKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionKeys.swift; sourceTree = "<group>"; };
+		F606AA4A2B6188FF00231B16 /* StolpersteinRouteListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StolpersteinRouteListItem.swift; sourceTree = "<group>"; };
 		F62C6FE52B269B2A00101D18 /* openapi.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = openapi.yaml; path = ../../openapi.yaml; sourceTree = "<group>"; };
 		F62C6FE62B269B2A00101D18 /* openapi-generator-config.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "openapi-generator-config.yml"; path = "../../openapi-generator-config.yml"; sourceTree = "<group>"; };
 		F6474E9D2B07688C00890712 /* ARStolpersteine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARStolpersteine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +108,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F606AA3D2B60ACED00231B16 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F606AA3F2B60AD1400231B16 /* RemoteImage.swift */,
+				F606AA4A2B6188FF00231B16 /* StolpersteinRouteListItem.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		F606AA412B60AD4400231B16 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F606AA422B60AD5E00231B16 /* RemoteImageCache.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		F6474E942B07688C00890712 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +151,8 @@
 				F62C6FE52B269B2A00101D18 /* openapi.yaml */,
 				F62C6FE62B269B2A00101D18 /* openapi-generator-config.yml */,
 				F6E195612B0777C00034A233 /* Info.plist */,
+				F606AA412B60AD4400231B16 /* Services */,
+				F606AA3D2B60ACED00231B16 /* Components */,
 				F6E1955E2B0772FD0034A233 /* views */,
 				F65BB7632B5DD6760041DDD1 /* Delegates */,
 				F6E195852B07A62D0034A233 /* Helper */,
@@ -161,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				F6E195862B07A64E0034A233 /* MapDelegate.swift */,
+				F606AA3A2B60AB1B00231B16 /* CompassHeading.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -179,6 +211,8 @@
 			children = (
 				F6E195872B07A64F0034A233 /* PageEnum.swift */,
 				F6E1959F2B0846FA0034A233 /* ColorExtension.swift */,
+				F606AA442B6134A900231B16 /* CompassRangeEnum.swift */,
+				F606AA472B616C8800231B16 /* DirectionKeys.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -353,10 +387,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F606AA4B2B6188FF00231B16 /* StolpersteinRouteListItem.swift in Sources */,
+				F606AA482B616C8800231B16 /* DirectionKeys.swift in Sources */,
 				F6E195992B07A7520034A233 /* RoutesView.swift in Sources */,
 				F6E195882B07A64F0034A233 /* MapDelegate.swift in Sources */,
 				F6E195942B07A6620034A233 /* MapView.swift in Sources */,
+				F606AA402B60AD1400231B16 /* RemoteImage.swift in Sources */,
+				F606AA3B2B60AB1B00231B16 /* CompassHeading.swift in Sources */,
 				F6E195A02B0846FA0034A233 /* ColorExtension.swift in Sources */,
+				F606AA432B60AD5E00231B16 /* RemoteImageCache.swift in Sources */,
+				F606AA452B6134A900231B16 /* CompassRangeEnum.swift in Sources */,
 				F6E195962B07A6620034A233 /* HomeView.swift in Sources */,
 				F6474EA12B07688C00890712 /* AppDelegate.swift in Sources */,
 				F6E195912B07A6620034A233 /* CameraARView.swift in Sources */,

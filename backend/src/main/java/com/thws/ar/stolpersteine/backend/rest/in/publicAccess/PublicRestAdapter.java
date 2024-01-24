@@ -4,8 +4,6 @@ import com.thws.ar.stolpersteine.backend.rest.in.publicAccess.mapper.PublicMappe
 import com.thws.ar.stolpersteine.backend.service.port.PhotoPort;
 import com.thws.ar.stolpersteine.backend.service.port.StolpersteinPort;
 import com.thws.arstolpersteine.gen.api.publicApi.PublicApi;
-import com.thws.arstolpersteine.gen.api.publicApi.model.PhotoDownloadDto;
-import com.thws.arstolpersteine.gen.api.publicApi.model.StolpersteinListResponseDto;
 import com.thws.arstolpersteine.gen.api.publicApi.model.StolpersteinPositionDto;
 import com.thws.arstolpersteine.gen.api.publicApi.model.StolpersteineResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +25,7 @@ public class PublicRestAdapter implements PublicApi {
 
     @Override
     public ResponseEntity<Resource> downloadPhoto(Long resourceGroupId, String resourceId) {
+        log.info("Download File with URI: {}", resourceGroupId + "/" + resourceId);
         return ResponseEntity.ok(photoService.download(resourceGroupId + "/" + resourceId));
     }
 

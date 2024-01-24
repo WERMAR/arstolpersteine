@@ -4,7 +4,7 @@ info:
   description: This is the Public OpenAPI Specification for the AR-Stolpersteine Backend. Every Endpoint is without an Authentication accessible
   version: 1.0.0
 servers:
-  - url: 'http://localhost:8580'
+  - url: 'http://localhost:443'
 paths:
   /api/public/stolpersteine:
     get:
@@ -295,10 +295,3 @@ components:
               type: number
               format: float
               example: 23.232232
-    PhotoDownloadDto:
-      description: Download Dto for Photo
-      type: object
-      properties:
-        photo:
-          type: string
-          format: binary
