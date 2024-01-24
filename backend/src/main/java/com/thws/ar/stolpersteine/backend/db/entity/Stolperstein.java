@@ -46,7 +46,7 @@ public class Stolperstein {
     @OneToOne(targetEntity = Victim.class, cascade = CascadeType.ALL)
     private Victim victim;
 
-    @OneToMany(mappedBy = "stolperstein", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "stolperstein")
     private List<Photo> photos;
 
 }

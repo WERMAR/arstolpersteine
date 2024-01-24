@@ -6,9 +6,12 @@ import com.thws.ar.stolpersteine.backend.db.repositories.PhotoRepository;
 import com.thws.ar.stolpersteine.backend.rest.in.secured.mapper.PhotoDtoMapper;
 import com.thws.ar.stolpersteine.backend.service.port.PhotoPort;
 import com.thws.arstolpersteine.gen.api.publicApi.model.PhotoDownloadDto;
+import com.thws.arstolpersteine.gen.api.secured.model.PhotoReqDto;
 import com.thws.arstolpersteine.gen.api.secured.model.PhotoResponseDto;
 import com.thws.arstolpersteine.gen.api.secured.model.ResourcePhotoDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,14 +54,26 @@ public class PhotoService implements PhotoPort {
     }
 
     @Override
-    public PhotoDownloadDto downloadPub(String fileUri) {
-        var resource = fileStorageService.loadFileAsResource(fileUri);
-        return PhotoDownloadDto.builder().photo(resource).build();
+    public Resource download(String fileUri) {
+        return fileStorageService.loadFileAsResource(fileUri);
     }
 
     @Override
-    public com.thws.arstolpersteine.gen.api.secured.model.PhotoDownloadDto downloadPrivate(String fileUri) {
-        var resource = fileStorageService.loadFileAsResource(fileUri);
-        return com.thws.arstolpersteine.gen.api.secured.model.PhotoDownloadDto.builder().photo(resource).build();
+    public List<Photo> loadPhotosForReq(List<@Valid PhotoReqDto> photos) {
+        List<Photo> dbPhotos = new ArrayList<>();
+        for (var reqPhoto : photos) {
+            var photoOpt = photoRepository.findById(reqPhoto.getId());
+            if (photoOpt.isPresent()) {
+                var photo = photoOpt.get();
+                photo.setHeading(reqPhoto.getHeading());
+                dbPhotos.add(photo);
+            }
+        }
+        return dbPhotos;
+    }
+
+    @Override
+    public void updatePhotos(List<Photo> photos) {
+        this.photoRepository.saveAll(photos);
     }
 }

@@ -3,7 +3,7 @@ package com.thws.ar.stolpersteine.backend.db.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Getter
 @Setter

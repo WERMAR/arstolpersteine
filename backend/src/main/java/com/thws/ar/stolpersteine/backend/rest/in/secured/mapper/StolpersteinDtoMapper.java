@@ -94,12 +94,18 @@ public class StolpersteinDtoMapper {
                         .streetName(stolperstein.getAddress().getStreetName())
                         .build())
                 .victim(VictimResponseDto.builder()
+                        .id(stolperstein.getVictim().getVictimId())
                         .dateOfBirth(((Date) stolperstein.getVictim().getDateOfBirth()).toLocalDate())
                         .dateOfDeath(((Date) stolperstein.getVictim().getDateOfBirth()).toLocalDate())
                         .firstname(stolperstein.getVictim().getName())
                         .lastname(stolperstein.getVictim().getLastName())
                         .build())
-                .photos(List.of())
+                .photos(stolperstein.getPhotos().stream().map(e-> PhotoResponseDto.builder()
+                        .id(e.getPhotoId())
+                        .heading(e.getHeading())
+                        .resourceUrl(e.getFileUrl())
+                        .resourceGroup("/" + e.getResourceGroupId())
+                        .build()).toList())
                 .build();
     }
 }

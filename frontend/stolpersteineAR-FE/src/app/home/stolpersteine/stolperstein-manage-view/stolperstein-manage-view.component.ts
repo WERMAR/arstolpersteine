@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {
-  PhotoReqDto,
-  PhotoUploadDto, PhotoUploadResponseDto, SecuredPhotosService,
+  PhotoReqDto, PhotoResponseDto, SecuredPhotosService,
   SecuredStolpersteineService, StolpersteineReqDto,
   StolpersteineResponseDto
 } from "../../../gen/secured-api";
@@ -179,7 +178,12 @@ export class StolpersteinManageViewComponent {
     }
   }
 
-  private getStolpersteinRequestDto(photoResponse: PhotoUploadResponseDto[] | undefined): StolpersteineReqDto {
+  private getStolpersteinRequestDto(photoResponse: PhotoResponseDto[] | undefined): StolpersteineReqDto {
+    const photos = photoResponse?.map(e => ({
+      id: e.id,
+      heading: this.photos.find(p => e.resourceUrl!.includes(p.file.name))?.heading
+    } as PhotoReqDto))
+    console.log(photos);
     return {
       description: this.stolpersteinForm.controls['description'].value,
       address: {
@@ -198,10 +202,7 @@ export class StolpersteinManageViewComponent {
         dateOfBirth: this.datePipe.transform(this.stolpersteinForm.controls['dateOfBirth'].value, 'yyyy-MM-dd')!,
         dateOfDeath: this.datePipe.transform(this.stolpersteinForm.controls['dateOfDeath'].value, 'yyyy-MM-dd')!,
       },
-      photos: photoResponse?.map(e => ({
-        id: e.id,
-        heading: this.photos.find(p => e.downloadURI!.includes(p.file.name))?.heading
-      } as PhotoReqDto))
+      photos: photos
     }
   }
 }

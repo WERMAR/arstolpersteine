@@ -29,7 +29,7 @@ public class Photo {
     @Column(name = "approved_user_name")
     private String approvedUsername;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Stolperstein.class)
     @JoinColumn(name = "stolperstein_id")
     private Stolperstein stolperstein;
 

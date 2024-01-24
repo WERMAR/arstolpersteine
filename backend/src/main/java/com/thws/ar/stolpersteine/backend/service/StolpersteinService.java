@@ -8,6 +8,7 @@ import com.thws.ar.stolpersteine.backend.db.repositories.OverpassStolpersteinRep
 import com.thws.ar.stolpersteine.backend.db.repositories.StolpersteinRepository;
 import com.thws.ar.stolpersteine.backend.rest.in.secured.mapper.StolpersteinDtoMapper;
 import com.thws.ar.stolpersteine.backend.service.port.OverpassApiPort;
+import com.thws.ar.stolpersteine.backend.service.port.PhotoPort;
 import com.thws.ar.stolpersteine.backend.service.port.StolpersteinPort;
 import com.thws.arstolpersteine.gen.api.secured.model.StolpersteinPositionDto;
 import com.thws.arstolpersteine.gen.api.secured.model.StolpersteineReqDto;
@@ -28,6 +29,7 @@ public class StolpersteinService implements StolpersteinPort {
     private final OverpassApiPort overpassApiPort;
     private final OverpassStolpersteinRepository overpassStolpersteinRepository;
     private final StolpersteinRepository stolpersteinRepository;
+    private final PhotoPort photoService;
     private final StolpersteinDtoMapper stolpersteinDtoMapper;
     private final StolpersteinMapper stolpersteinMapper;
     private final ClaimInformationService claimInformationService;
@@ -57,8 +59,9 @@ public class StolpersteinService implements StolpersteinPort {
 
     @Override
     public StolpersteineResponseDto updateStolperstein(Long stolpersteinId, StolpersteineReqDto request) {
+        var photos = photoService.loadPhotosForReq(request.getPhotos());
         var mappedRequestStolperstein = stolpersteinMapper.toEntity(request);
-        mappedRequestStolperstein.setDescription("dasdfasdfs");
+        mappedRequestStolperstein.setPhotos(photos);
         mappedRequestStolperstein.setCreatedUsername(claimInformationService.getUsernameFromToken());
         Optional<Stolperstein> existingStolpersteinOpt = this.stolpersteinRepository.findById(stolpersteinId);
         if (existingStolpersteinOpt.isEmpty()) {
@@ -66,13 +69,15 @@ public class StolpersteinService implements StolpersteinPort {
             if (existingOverpassStolpersteinOpt.isEmpty()) {
                 throw new NotFoundException();
             }
+            mappedRequestStolperstein.getPhotos().forEach(e -> e.setStolperstein(mappedRequestStolperstein));
             var updatedStolperstein = this.stolpersteinRepository.save(mappedRequestStolperstein);
             this.overpassStolpersteinRepository.delete(existingOverpassStolpersteinOpt.get());
             return stolpersteinDtoMapper.toStolpersteinDto(updatedStolperstein);
         }
         var existingStolperstein = existingStolpersteinOpt.get();
-        existingStolperstein = mappedRequestStolperstein;
-        var updatedStolperstein = this.stolpersteinRepository.save(mappedRequestStolperstein);
+        this.mergeStolpersteinUpdate(existingStolperstein, mappedRequestStolperstein);
+        existingStolperstein.getPhotos().forEach(e -> e.setStolperstein(existingStolperstein));
+        var updatedStolperstein = this.stolpersteinRepository.save(existingStolperstein);
         return stolpersteinDtoMapper.toStolpersteinDto(updatedStolperstein);
     }
 
@@ -89,4 +94,40 @@ public class StolpersteinService implements StolpersteinPort {
         var stolpersteinListStream = stolpersteinByPosition.stream().map(this.stolpersteinDtoMapper::toPositionDto);
         return Stream.concat(overpassListStream, stolpersteinListStream).toList();
     }
+
+
+    private void mergeStolpersteinUpdate(Stolperstein existingStolperstein, Stolperstein mappedRequestStolperstein) {
+        if (!existingStolperstein.getVictim().getName().equals(mappedRequestStolperstein.getVictim().getName())) {
+            existingStolperstein.getVictim().setName(mappedRequestStolperstein.getVictim().getName());
+        }
+        if (!existingStolperstein.getVictim().getLastName().equals(mappedRequestStolperstein.getVictim().getLastName())) {
+            existingStolperstein.getVictim().setName(mappedRequestStolperstein.getVictim().getName());
+        }
+        if (!existingStolperstein.getVictim().getDateOfBirth().equals(mappedRequestStolperstein.getVictim().getDateOfBirth())) {
+            existingStolperstein.getVictim().setDateOfBirth(mappedRequestStolperstein.getVictim().getDateOfBirth());
+        }
+        if (!existingStolperstein.getVictim().getDateOfDeath().equals(mappedRequestStolperstein.getVictim().getDateOfDeath())) {
+            existingStolperstein.getVictim().setDateOfDeath(mappedRequestStolperstein.getVictim().getDateOfDeath());
+        }
+
+        if (!existingStolperstein.getAddress().getCity().equals(mappedRequestStolperstein.getAddress().getCity())) {
+            existingStolperstein.getAddress().setCity(mappedRequestStolperstein.getAddress().getCity());
+        }
+        if (!existingStolperstein.getAddress().getHouseNumber().equals(mappedRequestStolperstein.getAddress().getHouseNumber())) {
+            existingStolperstein.getAddress().setHouseNumber(mappedRequestStolperstein.getAddress().getHouseNumber());
+        }
+        if (!existingStolperstein.getAddress().getStreetName().equals(mappedRequestStolperstein.getAddress().getStreetName())) {
+            existingStolperstein.getAddress().setStreetName(mappedRequestStolperstein.getAddress().getStreetName());
+        }
+        if (!existingStolperstein.getAddress().getPostCode().equals(mappedRequestStolperstein.getAddress().getPostCode())) {
+            existingStolperstein.getAddress().setPostCode(mappedRequestStolperstein.getAddress().getPostCode());
+        }
+
+        if (!existingStolperstein.getDescription().equals(mappedRequestStolperstein.getDescription())) {
+            existingStolperstein.setDescription(mappedRequestStolperstein.getDescription());
+        }
+
+        existingStolperstein.setPhotos(mappedRequestStolperstein.getPhotos());
+    }
+
 }

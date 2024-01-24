@@ -126,15 +126,15 @@ paths:
           description: ID of Photo
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         200:
           description: Return information when upload was successfully
           content:
-            application/json:
+            application/octet-stream:
               schema:
-                $ref: '#/components/schemas/PhotoDownloadDto'
+                type: string
+                format: binary
         404:
           description: Resource was not found with given Resource-URL
           content:
