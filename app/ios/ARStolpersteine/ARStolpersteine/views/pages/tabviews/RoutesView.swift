@@ -16,6 +16,8 @@ struct RoutesView: View, MapDelegate {
     @State private var updatedRegion: MKCoordinateRegion? = nil
     @State private var routeList = [StolpersteinListItem]()
     @State private var stolpersteinMap = [Int64: StolpersteinWithDistance]()
+    @State var showingBottomSheet = false
+    @State var selectedBottomSheetVal: StolpersteinWithDistance? = nil
     private let client: Client
     
     
@@ -26,13 +28,16 @@ struct RoutesView: View, MapDelegate {
                 Color.backgroundColor.ignoresSafeArea()
                 VStack(alignment: .leading){
                     Text("Stolpersteine in der Nähe")
-                                   .font(.title3)
-                                   .frame(alignment: .leading)
-                                   .fontWeight(.bold)
-                                   .foregroundColor(.gray)
-                                   .padding(.bottom, 20)
+                        .font(.title2)
+                        .frame(alignment: .leading)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                        .padding(.bottom, 20)
                     ForEach(self.stolpersteinMap.sorted { $0.key < $1.key }, id: \.key) {key, value in
-                        StolpersteinRouteListItem(value)
+                        StolpersteinRouteListItem(value).onTapGesture {
+                            self.selectedBottomSheetVal = value
+                            showingBottomSheet.toggle()
+                        }
                     }
                 }.padding(10)
             }.onAppear {
@@ -47,6 +52,80 @@ struct RoutesView: View, MapDelegate {
                         .scaledToFit()
                         .frame(width: 150, height:150)
                 }
+            }.sheet(item: $selectedBottomSheetVal) { item in
+                ZStack(alignment: .top) {
+                    VStack {
+                        Text(String("\(item.stolperstein.victim!.firstname!) \(item.stolperstein.victim!.lastname!)"))
+                            .font(.title3)
+                            .frame(alignment: .center)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
+                        VStack (alignment: .leading) {
+                            Divider()
+                                .padding(.bottom, 20)
+                            VStack(alignment: .leading) {
+                                Group {
+                                    Text(String("Allgemeine Informationen"))
+                                        .frame(alignment: .center)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.gray)
+                                    Divider()
+                                    HStack {
+                                        Text(String("Vorname: ")).bold()
+                                        Text(item.stolperstein.victim!.firstname!)
+                                    }
+                                    HStack {
+                                        Text(String("Nachname: ")).bold()
+                                        Text(item.stolperstein.victim!.lastname!)
+                                    }
+                                    HStack {
+                                        Text(String("Geburtsdatum: ")).bold()
+                                        Text(item.stolperstein.victim!.dateOfBirth ?? String("n.A."))
+                                    }
+                                    HStack {
+                                        Text(String("Todesdatum: ")).bold()
+                                        Text(item.stolperstein.victim!.dateOfDeath ?? String("n.A."))
+                                    }
+                                    Divider()
+                                        .padding(.bottom, 30)
+                                }
+                                Group {
+                                    Text(String("Adress Informationen"))
+                                        .frame(alignment: .center)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.gray)
+                                    Divider()
+                                    HStack {
+                                        Text(String("Straße & Haus-Nr: ")).bold()
+                                        Text(String("\(item.stolperstein.address!.streetName ?? "n.A.") \(item.stolperstein.address!.houseNumber ?? "")"))
+                                    }
+                                    HStack {
+                                        Text(String("PLZ & Stadt: ")).bold()
+                                        Text(String("\(item.stolperstein.address!.postCode ?? "n.A.") \(item.stolperstein.address!.city ?? "")"))
+                                    }
+                                    HStack {
+                                        Text(String("Geburtsdatum: ")).bold()
+                                        Text(item.stolperstein.victim!.dateOfBirth ?? String("n.A."))
+                                    }
+                                    HStack {
+                                        Text(String("Todesdatum: ")).bold()
+                                        Text(item.stolperstein.victim!.dateOfDeath ?? String("n.A."))
+                                    }
+                                    Divider()
+                                        .padding(.bottom, 30)
+                                }
+                                Text(String("Beschreibung"))
+                                    .frame(alignment: .center)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.gray)
+                                Divider()
+                                    .padding(.bottom, 20)
+                                Text(item.stolperstein.description ?? "")
+                            }
+                        }
+                    }
+                }.padding(.leading, 10)
+                    .padding(.trailing, 10)
             }
         }
     }
