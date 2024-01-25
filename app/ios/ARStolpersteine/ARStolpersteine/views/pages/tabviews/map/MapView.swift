@@ -22,9 +22,9 @@ struct MapView: View, MapDelegate {
         ZStack{
             Map(coordinateRegion: $manager.region,
                 showsUserLocation: true, annotationItems: annotationItems) { place in
-                MapMarker(coordinate: place.coordinate, tint: Color.purple)
+                MapMarker(coordinate: place.coordinate, tint: .primary)
             }
-            .edgesIgnoringSafeArea(.top)
+                .edgesIgnoringSafeArea(.top)
         }.onAppear {
             manager.startUpdatingPosition(self)
         }
