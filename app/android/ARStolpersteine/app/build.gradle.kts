@@ -57,4 +57,10 @@ dependencies {
     //implementation("com.example:permission-utils:1.0.0")
     //implementation("org.permissionsdispatcher:permissionsdispatcher:4.5.0")
 
+    // to handle permission request
+    // implementation("pub.devrel:easypermissions:3.0.0")
+
+    // AUF-AR library
+    //implementation("com.github.SeptiawanAjiP:AugmentedReality-LocationBased:1.0.1")
+
 }
