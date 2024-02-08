@@ -70,6 +70,14 @@ export class StolpersteinManageViewComponent {
         updateOn: 'change',
         validators: [Validators.required]
       }),
+      latitude: new FormControl({value: this.stolperstein?.position?.lat, disabled: false}, {
+        updateOn: 'change',
+        validators: [Validators.required]
+      }),
+      longitude: new FormControl({value: this.stolperstein?.position?.lng, disabled: false}, {
+        updateOn: 'change',
+        validators: [Validators.required]
+      }),
       dateOfBirth: new FormControl({value: this.stolperstein?.victim?.dateOfBirth, disabled: false}, {
         updateOn: 'change',
         validators: [Validators.required]
@@ -193,8 +201,8 @@ export class StolpersteinManageViewComponent {
         postCode: this.stolpersteinForm.controls['postcode'].value,
       },
       position: {
-        lat: this.stolperstein?.position?.lat!,
-        lng: this.stolperstein?.position?.lng!
+        lat: this.stolpersteinForm.controls['latitude'].value,
+        lng: this.stolpersteinForm.controls['longitude'].value
       },
       victim: {
         firstname: this.stolpersteinForm.controls['firstname'].value,
