@@ -43,3 +43,68 @@ It's useful when a new configuration of the __realm.json__ is available and has 
 ### Connect psql inside docker postgres on THWS Server
 1. ```docker exec -it <docker container name> bash```
 2. ```psql -h localhost -p 5432 -U keycloak```
+
+
+### Curl Keylcoak on Linux Server
+```bash 
+      
+      curl -X POST \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -H "Authorization: Basic YmFja2VuZC1jbGllbnQ6dGx6UmlFUmdjQ2VweEVRaVh5cjJpUGM1R3B3Q2pvR3c=" \
+  -H "User-Agent: PostmanRuntime/7.36.0" \
+  -H "Accept: */*" \
+  -H "Cache-Control: no-cache" \
+  -H "Postman-Token: 2517ff5e-1e29-4592-96af-0301c9f7126b" \
+  -H "Host: 10.100.4.1:5432" \
+  -H "Accept-Encoding: gzip, deflate, br" \
+  -H "Connection: keep-alive" \
+  -d "grant_type=password&username=test-user&password=password" \
+  http://localhost:5432/realms/arStolpersteine/protocol/openid-connect/token > token.txt
+```
+
+### Setup Information's for Prod / Local
+
+1. Default.conf
+   
+The default.conf has to be modified to the server target api server-address. The default.conf is used to configure the nginx-proxy. 
+```text
+ proxy_pass http://<target-address>/api/;
+```
+
+2. application.yml
+
+The Application.yml has to be modified on to that address, which reaches keycloak in prod. 
+
+Example: Keycloak is located at 10.100.4.1:5432
+```yaml
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${backend.keycloak.base}/certs
+          issuer-uri: http://10.100.4.1:5432/realms/${backend.keycloak.realm}
+```
+
+3. keycloak-init.factory.ts
+
+Here also the production url of keycloak has to be written down.
+
+```ts
+    ...
+    config: {
+        url: 'http://<your-keycloak-address>:<keycloak-port>',
+...
+```
+
+4. Running on different Environments
+
+Towards the system is running on docker you can complete setup the runtime in every environment. For that using the Docker-Files to build your own image for your target. Currently there are the Images "wermar/arproject-be" and "wermar/arproject-fe". Both have an Tag "linux" and Tag "latest". 
+
+- linux -> Build for Linux Distributions with amd64 Arch
+- latest -> Build for Mac Distributions with the arm64 Arch
+
+> Note 
+>
+> Modify the docker-compose file if you want to use a different Image on your target environment.
+
+
