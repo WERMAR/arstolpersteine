@@ -1,6 +1,5 @@
-= THWS - CookMate
+= THWS - ARStolpersteine Programmierprojekt
 Anforderungsspezifikation
-Timo Sauter - Pascal Sauerstein - Marcel Wernisch | v1.0.1 | 10.06.2023
 :doctype: book
 :toc:
 :toc-title: Inhaltsverzeichnis

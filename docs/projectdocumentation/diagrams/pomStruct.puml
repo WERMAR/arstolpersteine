@@ -1,0 +1,9 @@
+@startuml
+
+folder "root" {
+    folder "backend"
+    folder "frontend"
+    folder "docs"
+}
+
+@enduml

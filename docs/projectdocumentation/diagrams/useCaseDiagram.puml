@@ -1,0 +1,23 @@
+@startuml
+
+left to right direction
+
+actor Nutzer as User
+actor Admin as Admin
+actor "Verwandte von Opfern" as Relatives
+
+rectangle "Stolperstein System" {
+    usecase "Stolpersteine für aktuellen Standort sehen" as UC1
+    usecase "Informationen über Stolpersteine betrachten" as UC2
+    usecase "AR-View nutzen" as UC3
+    usecase "Anträge für Stolpersteine sehen und verwalten" as UC4
+    usecase "Stolpersteine verwalten und Einträge machen" as UC5
+
+    User --> UC1
+    User --> UC2
+    User --> UC3
+    Admin --> UC4
+    Relatives --> UC5
+}
+
+@enduml
