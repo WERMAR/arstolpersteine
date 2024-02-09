@@ -1,0 +1,86 @@
+@startuml
+
+class address {
+   street_name: varchar(50)
+   house_number: varchar(5)
+   post_code: varchar(6)
+   city: varchar(50)
+   address_id: bigint
+}
+class databasechangelog {
+   id: varchar(255)
+   author: varchar(255)
+   filename: varchar(255)
+   dateexecuted: timestamp
+   orderexecuted: integer
+   exectype: varchar(10)
+   md5sum: varchar(35)
+   description: varchar(255)
+   comments: varchar(255)
+   tag: varchar(255)
+   liquibase: varchar(20)
+   contexts: varchar(255)
+   labels: varchar(255)
+   deployment_id: varchar(10)
+}
+class databasechangeloglock {
+   locked: boolean
+   lockgranted: timestamp
+   lockedby: varchar(255)
+   id: integer
+}
+class overpass_stolperstein {
+   lng: double precision
+   lat: double precision
+   city: varchar(50)
+   country: varchar(50)
+   housenumber: varchar(4)
+   postcode: varchar(6)
+   street: varchar(255)
+   suburb: varchar(255)
+   memorial_text: varchar(512)
+   victim_name: varchar(255)
+   date_of_birth: varchar(80)
+   date_of_death: varchar(80)
+   overpass_id: bigint
+}
+class photo {
+   heading: integer
+   approved: boolean
+   created_user_name: varchar(128)
+   approved_user_name: varchar(128)
+   stolperstein_id: bigint
+   file_url: varchar(512)
+   resource_group_id: bigint
+   photo_id: bigint
+}
+class spatial_ref_sys {
+   auth_name: varchar(256)
+   auth_srid: integer
+   srtext: varchar(2048)
+   proj4text: varchar(2048)
+   srid: integer
+}
+class stolperstein {
+   description: varchar(512)
+   active: boolean
+   created_user_name: varchar(128)
+   approved_user_name: varchar(128)
+   victim_id: bigint
+   lng: double precision
+   lat: double precision
+   address_id: bigint
+   stolperstein_id: bigint
+}
+class victim {
+   name: varchar(30)
+   last_name: varchar(30)
+   date_of_birth: date
+   date_of_death: date
+   victim_id: bigint
+}
+
+photo                  -[#595959,plain]-^  stolperstein          : "stolperstein_id"
+stolperstein           -[#595959,plain]-^  address               : "address_id"
+stolperstein           -[#595959,plain]-^  victim                : "victim_id"
+@enduml
