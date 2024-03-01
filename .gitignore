@@ -94,3 +94,6 @@ Carthage/
 *.idea/
 
 gen
+
+
+.DS_Store
